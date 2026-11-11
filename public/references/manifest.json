@@ -1,0 +1,29 @@
+{
+  "description": "Original user-supplied reference images; geometry is reconstructed separately, not replaced by a reference image.",
+  "files": {
+    "blacksite": {
+      "file": "blacksite.jpg",
+      "sha256": "9031f127a195a1e885e2d6e9b85867dd7ba87d29246bfa8611820fec05cd3585",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "skyport": {
+      "file": "skyport.jpg",
+      "sha256": "30ae0f97db58dec2e00c4b3081a9331e70d086dba36843e33f577cf9b5c168c4",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "terminal": {
+      "file": "terminal.jpg",
+      "sha256": "965dfa9df4a1d1d51158962653794dfa2296a856bc2c8f15f7cdde02bf1bfae9",
+      "size": [
+        1254,
+        1254
+      ]
+    }
+  }
+}

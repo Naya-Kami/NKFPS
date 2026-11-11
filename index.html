@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101a20">
+<meta name="description" content="提供された3枚のマップをもとに再構成した、Blacksite Echo・Skyport Nexus・Terminal Belowの3Dマップ。">
+<title>MAP ATLAS — BLACKSITE / SKYPORT / TERMINAL</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/src/style.css">
+</head>
+<body data-map="blacksite">
+<div id="world" aria-label="選択したマップの3D表示"></div><div id="edge-shade"></div>
+<div id="loading"><div class="loader-symbol">A<span>∕</span></div><b>MAP ATLAS</b><div class="load-track"><i></i></div><p>マップを準備しています</p></div>
+<header class="topbar">
+<a href="#blacksite" class="brand" aria-label="マップ一覧"><svg viewBox="0 0 40 40" fill="none"><path d="M20 4 36 34H25l-5-9-5 9H4L20 4Z" stroke="currentColor" stroke-width="1.8"/><path d="m20 27 4 7h-8l4-7Z" fill="currentColor"/></svg><span>MAP ATLAS<small>REFERENCE RECONSTRUCTIONS</small></span></a>
+<nav id="map-tabs" aria-label="マップを切り替える"><button class="map-tab selected" data-map="blacksite"><em>01</em><span>BLACKSITE <b>ECHO</b></span></button><button class="map-tab" data-map="skyport"><em>02</em><span>SKYPORT <b>NEXUS</b></span></button><button class="map-tab" data-map="terminal"><em>03</em><span>TERMINAL <b>BELOW</b></span></button></nav>
+<div class="header-tools"><button id="audio-button" class="icon" aria-label="環境音をオンにする" title="環境音">♫</button><button id="settings-button" class="icon" aria-label="画質・操作設定" title="設定">⚙</button><button id="help-button" class="icon help" aria-label="操作方法" title="操作方法">?</button></div>
+</header>
+<aside id="map-card"><span class="eyebrow" id="reference-number">REFERENCE MAP / 01</span><h1 id="map-title">BLACKSITE<br><span>ECHO</span></h1><p id="map-subtitle">COASTAL RESEARCH FACILITY</p><div class="map-facts"><span><i></i><b id="region-count">18</b> 主要区画</span><span>5v5 MAP LAYOUT</span></div><button id="reference-button" class="reference-button"><span>▧</span> 元画像と比較 <i>↗</i></button><button id="locations-button" class="text-button">各エリアへ移動 <span>→</span></button><p class="source-note">提供画像の外形・部屋・通路を<br>座標から3Dへ再構成</p></aside>
+<div id="viewport-tools"><button id="labels-button" aria-pressed="true">区画名 <span>ON</span></button><button id="routes-button" aria-pressed="true">ルート <span>ON</span></button><button id="fullscreen-button" aria-label="全画面表示">⛶</button></div>
+<div id="labels" aria-hidden="true"></div>
+<div class="north-marker"><span>N</span><i>↑</i><small>NORTH</small></div>
+<div id="view-controls"><div class="view-modes"><button id="plan-button" class="selected">▦ <span>俯瞰図</span></button><button id="orbit-button">◇ <span>3Dビュー</span></button></div><div class="zoom-control"><button id="zoom-out" aria-label="縮小">−</button><span>ZOOM</span><button id="zoom-in" aria-label="拡大">+</button></div><button id="enter-button" class="enter-button">探索する <span>↗</span></button></div>
+<div id="view-hint">俯瞰図で配置を確認 · 3Dビューはドラッグで回転</div>
+<aside id="reference-panel" class="hidden"><div class="reference-heading"><span>YOUR REFERENCE <b id="reference-caption">01 / BLACKSITE ECHO</b></span><button id="close-reference" aria-label="比較を閉じる">✕</button></div><div class="reference-image"><img id="reference-image" src="/references/blacksite.jpg" alt="ユーザー提供のBlacksite Echoマップ設計画像"></div><a id="reference-original" href="/references/blacksite.jpg" target="_blank" rel="noopener">元画像を大きく開く ↗</a></aside>
+<div id="hud" class="hidden"><aside id="mini-map" aria-label="ミニマップ"><header><span><i></i><b id="mini-map-title">BLACKSITE ECHO</b></span><div><button id="mini-map-expand" aria-label="全体マップを拡大">⤢</button><button id="mini-map-toggle" aria-label="ミニマップを畳む" aria-expanded="true">−</button></div></header><div class="mini-map-body"><button id="mini-map-canvas" aria-label="現在位置とマップを拡大"></button><span class="mini-north">↑ N</span><div class="mini-map-modes"><button data-mini-mode="local" aria-pressed="true">周辺</button><button data-mini-mode="full" aria-pressed="false">全体</button></div><div class="mini-map-readout"><b id="mini-map-zone">SPAWN</b><span id="mini-map-scale">40 m / NORTH UP</span></div></div></aside><div class="compass"><span>W · · · ·</span><b id="heading">000</b><span>· · · · E</span></div><div class="hud-location"><small id="hud-map-name">BLACKSITE ECHO</small><strong id="zone-name">ATTACKER SPAWN</strong></div><div class="crosshair">+</div><div class="hud-status"><b>100 <span>VITALS</span></b><div><i id="stamina"></i></div></div><div class="hud-actions"><button id="flashlight-button"><kbd>F</kbd> ライト <b id="flashlight-state">OFF</b></button><button id="hud-locations-button"><kbd>M</kbd> マップ</button><button id="pause-button"><kbd>ESC</kbd> 一時停止</button></div><div id="touch-controls"><div id="move-pad"><i id="move-stick"></i></div><button id="jump-button" aria-label="ジャンプ">↑</button><span>右側をドラッグして視点移動</span></div></div>
+<footer><span><i></i> <strong id="footer-map-name">BLACKSITE ECHO</strong><em>/</em> <span id="footer-view">PLAN VIEW</span></span><span class="footer-meta">THREE DISTINCT MAPS <i>·</i> REAL-TIME 3D</span><button id="footer-help">操作方法 <span>?</span></button></footer>
+<div id="modal-backdrop" class="hidden"><section id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button id="close-modal" class="modal-close" aria-label="閉じる">✕</button><div id="modal-content"></div></section></div>
+<div id="toast" class="hidden" role="status"></div>
+<script type="module" src="/src/main.js"></script>
+</body></html>

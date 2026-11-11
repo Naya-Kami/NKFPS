@@ -1,0 +1,276 @@
+{
+  "license": "CC0-1.0",
+  "processing": "Base maps: maximum 1024px. Selected HIGH / ULTRA maps: original 2K sources converted to WebP without upscaling; aspect ratio and OpenGL normal channels preserved. Albedo is sRGB; normals and roughness are linear data.",
+  "files": {
+    "wall-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete034/Concrete034_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete034",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 512,
+      "sha256": "29292f107f1000fd8408a277163b51e1dd72446797c6eaecc7853900b8ca0bab"
+    },
+    "wall-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete034/Concrete034_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete034",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 512,
+      "sha256": "92f0054e902c120333e1264c6724a7d9c32b8c6b49412e708e489d3622b022d5"
+    },
+    "wall-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete034/Concrete034_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete034",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 512,
+      "sha256": "9d54f1c74a96fc6ba0089a661f5f8f79c553d1551d04a16bb79859e9ce805002"
+    },
+    "concrete-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete047A/Concrete047A_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete047A",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "ba01edd72cefbd41fb9e99872c43c2788921d68aad90c508062c2ead56845fc2"
+    },
+    "concrete-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete047A/Concrete047A_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete047A",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "56d4d8fe7f79129757580ef0bb75d699560fd9b9cb321444e8d171a6f666ae43"
+    },
+    "concrete-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete047A/Concrete047A_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete047A",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "aa148593fa9e3c23d4da83939257027670c9320954c2a956d8156d43af401339"
+    },
+    "metal-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/rusty_painted_metal_diff_1k.jpg",
+      "official_source": "https://polyhaven.com/a/rusty_painted_metal",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "9405766da994f7f4f71dbfe95ead3164809c4cad111958b4bdefed33a4d79535"
+    },
+    "metal-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/rusty_painted_metal_normal_1k.jpg",
+      "official_source": "https://polyhaven.com/a/rusty_painted_metal",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "1ba4f0a85c7d32efb4552811575e0dc24ddf5ba7d40eaaad05595c399ba55bd5"
+    },
+    "metal-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/rusty_painted_metal_rough_1k.jpg",
+      "official_source": "https://polyhaven.com/a/rusty_painted_metal",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "b3904ce327d25c51853a22ea5619168f4aa3a2a76d7efc5a08dde56b93333cba"
+    },
+    "rock-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Rock058/Rock058_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Rock058",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "eeff0e09d194eb6d70c06fddd467fa76fc969f05aa6cbe745159449fc493f9ef"
+    },
+    "rock-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Rock058/Rock058_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Rock058",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "f49e72b0938cdd5217c382fb55522efcb8c93d88189bb31f6ccb4be1e90920a7"
+    },
+    "rock-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Rock058/Rock058_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Rock058",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "12becb3d1a4dbbb5fefde7a7dee024f02443393e28d4383bbbe2edff15620800"
+    },
+    "asphalt-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/asphalt_03_diff_1k.jpg",
+      "official_source": "https://polyhaven.com/a/asphalt_03",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "00a8846c100148e583e800fb7401a3f0c769444126daaf561dee953a877d858f"
+    },
+    "asphalt-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/asphalt_03_normal_1k.jpg",
+      "official_source": "https://polyhaven.com/a/asphalt_03",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "12eb7b0b50cebda1a72ff3379906a78ee39b7a2222740651450ba8e6e326535d"
+    },
+    "asphalt-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/asphalt_03_rough_1k.jpg",
+      "official_source": "https://polyhaven.com/a/asphalt_03",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "2fe1fdf363096c69442285ea789f1f0aad37d0fbc20cdfc9bc7fb36b3a03c01e"
+    },
+    "aggregate-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/gravel_embedded_concrete_diff_1k.jpg",
+      "official_source": "https://polyhaven.com/a/gravel_embedded_concrete",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "6fc39a3fe37dc13cdfe59617ce2457e6dac6cc0b057c7d208677003974bb3527"
+    },
+    "aggregate-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/gravel_embedded_concrete_normal_1k.jpg",
+      "official_source": "https://polyhaven.com/a/gravel_embedded_concrete",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "744c82e711db95a50fa38eb8c723ed1e62c7d829f92357e00d010e47d49ce296"
+    },
+    "aggregate-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/gravel_embedded_concrete_rough_1k.jpg",
+      "official_source": "https://polyhaven.com/a/gravel_embedded_concrete",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "6c70911602a842828a241452356e8747e8626bb68681ced3e2b3f2e07fd6d140"
+    },
+    "sky.hdr": {
+      "source_url": "https://raw.githubusercontent.com/AetherRadar/operation-steel-tide/main/assets/textures/kloppenheim_06_puresky_1k.hdr",
+      "official_source": "https://polyhaven.com/a/kloppenheim_06_puresky",
+      "license": "CC0-1.0",
+      "sha256": "206c67e3a1b992282821cf06662bdd69bbb4915c1c4444a66338a40d6a7d4e34"
+    },
+    "steel-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Metal055A/Metal055A_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Metal055A",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "9b6f9019da5e7c704e500b915f1e60d71196256d0ab4c24b2b5c1e508a06d6a9"
+    },
+    "steel-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Metal055A/Metal055A_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Metal055A",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "d6b35441bdd1f9064fa9f6cb93619ffb0919c6de5a4b3574348d3b2fb69b0376"
+    },
+    "steel-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Metal055A/Metal055A_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Metal055A",
+      "license": "CC0-1.0",
+      "width": 1024,
+      "height": 1024,
+      "sha256": "ee94150d3ae0da44a608d152d25343cbd2fa23cb02745d4e52084bbc491b2a0d"
+    },
+    "hi/wall-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete034/Concrete034_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete034",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 1024,
+      "sha256": "ec4254cc959c547285e3ec85a670b37448267dbee5def3f3fe05679e2fa5dad6"
+    },
+    "hi/wall-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete034/Concrete034_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete034",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 1024,
+      "sha256": "7e11f0043da2d63913302074fe03becc7106e3394c3c0493ddfabb714ec95ec1"
+    },
+    "hi/wall-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete034/Concrete034_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete034",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 1024,
+      "sha256": "e7980dfbb8ff8704a1d49282310de0f816850cca36d9b1b3070dfa6182efef50"
+    },
+    "hi/concrete-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete047A/Concrete047A_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete047A",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "b04e24d3bc08f53b228682c723d509183157c8aa6af5c696629935682bc34a4e"
+    },
+    "hi/concrete-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete047A/Concrete047A_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete047A",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "9bb9db0ee0ffeea995617d0bfbf9f2835e0741090ce3a5f2af0a1c6b5fa4267b"
+    },
+    "hi/concrete-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Concrete047A/Concrete047A_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Concrete047A",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "51fb122492b1b2c6d18f29da1b90c983dae6d7030be4d7fb0837cdd93212db28"
+    },
+    "hi/rock-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Rock058/Rock058_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Rock058",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "2d28b19f14600335adede1fc6e82b5435ed0f36ba86f27d64f00d4cc32d16e3e"
+    },
+    "hi/rock-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Rock058/Rock058_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Rock058",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "2a313b4ac1a054fb9350c28a1063c486314634fe58be499662877f364e7aae43"
+    },
+    "hi/rock-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Rock058/Rock058_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Rock058",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "ae12fe2df66d5800785827421083012017216e38ccc574b0bc0fb0eea33d54b6"
+    },
+    "hi/steel-color.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Metal055A/Metal055A_2K-JPG_Color.jpg",
+      "official_source": "https://ambientcg.com/view?id=Metal055A",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "04d4d201a29cff2344430128e131966cec839207759d4fa216424a1badcb54e6"
+    },
+    "hi/steel-normal.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Metal055A/Metal055A_2K-JPG_NormalGL.jpg",
+      "official_source": "https://ambientcg.com/view?id=Metal055A",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "1f8da84b70ee7f206845857888d6d4ddb7091e6c7f6978b240449a2ad7a46974"
+    },
+    "hi/steel-roughness.webp": {
+      "source_url": "https://raw.githubusercontent.com/petroulacl/fps-asset-kit/main/textures/Metal055A/Metal055A_2K-JPG_Roughness.jpg",
+      "official_source": "https://ambientcg.com/view?id=Metal055A",
+      "license": "CC0-1.0",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "7216fabef8b7b09b4751c24656a201e75e14a783e93100bca0b08e58f47a781c"
+    }
+  }
+}

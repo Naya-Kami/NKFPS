@@ -1,0 +1,5493 @@
+{
+  "id": "terminal",
+  "title": "TERMINAL BELOW",
+  "reference": "3-写真4.jpg",
+  "referenceSize": [
+    1254,
+    1254
+  ],
+  "origin": [
+    640,
+    600
+  ],
+  "metersPerPixel": 0.1,
+  "north": "-pixelY",
+  "defaultFloorY": 0,
+  "notes": [
+    "Pixel boundary trace from the supplied illustration. Major anchors and relative proportions are direct; small wall jogs have about 5-8px uncertainty because of shadows and wall-top thickness.",
+    "This is an enclosed metro terminal. Preserve the north-south long station, two parallel trains, long platforms, central sightline, one transverse bridge and two side service loops. Do not turn it into an outdoor campus.",
+    "No large bridge stair towers are visible. Bridge elevation is suggested but not dimensioned; use compact endpoint access, not invented external stair buildings.",
+    "Outer perimeter includes the dark but playable rotation corridors. Dark flooring is not automatically a void."
+  ],
+  "outer": [
+    [
+      526,
+      13
+    ],
+    [
+      596,
+      13
+    ],
+    [
+      596,
+      26
+    ],
+    [
+      662,
+      26
+    ],
+    [
+      662,
+      13
+    ],
+    [
+      734,
+      13
+    ],
+    [
+      734,
+      65
+    ],
+    [
+      815,
+      65
+    ],
+    [
+      835,
+      82
+    ],
+    [
+      835,
+      175
+    ],
+    [
+      887,
+      175
+    ],
+    [
+      887,
+      169
+    ],
+    [
+      973,
+      169
+    ],
+    [
+      973,
+      229
+    ],
+    [
+      1021,
+      229
+    ],
+    [
+      1049,
+      256
+    ],
+    [
+      1049,
+      361
+    ],
+    [
+      1020,
+      361
+    ],
+    [
+      1020,
+      756
+    ],
+    [
+      972,
+      756
+    ],
+    [
+      972,
+      884
+    ],
+    [
+      925,
+      884
+    ],
+    [
+      925,
+      981
+    ],
+    [
+      861,
+      981
+    ],
+    [
+      861,
+      1001
+    ],
+    [
+      828,
+      1028
+    ],
+    [
+      828,
+      1055
+    ],
+    [
+      807,
+      1055
+    ],
+    [
+      807,
+      1136
+    ],
+    [
+      752,
+      1136
+    ],
+    [
+      752,
+      1167
+    ],
+    [
+      526,
+      1167
+    ],
+    [
+      526,
+      1146
+    ],
+    [
+      486,
+      1146
+    ],
+    [
+      486,
+      1053
+    ],
+    [
+      427,
+      1053
+    ],
+    [
+      427,
+      1014
+    ],
+    [
+      481,
+      1014
+    ],
+    [
+      481,
+      1024
+    ],
+    [
+      519,
+      1024
+    ],
+    [
+      519,
+      964
+    ],
+    [
+      453,
+      964
+    ],
+    [
+      453,
+      940
+    ],
+    [
+      428,
+      940
+    ],
+    [
+      428,
+      951
+    ],
+    [
+      281,
+      951
+    ],
+    [
+      249,
+      919
+    ],
+    [
+      249,
+      867
+    ],
+    [
+      262,
+      867
+    ],
+    [
+      262,
+      802
+    ],
+    [
+      259,
+      802
+    ],
+    [
+      259,
+      783
+    ],
+    [
+      270,
+      783
+    ],
+    [
+      270,
+      673
+    ],
+    [
+      248,
+      673
+    ],
+    [
+      248,
+      593
+    ],
+    [
+      270,
+      593
+    ],
+    [
+      270,
+      323
+    ],
+    [
+      285,
+      323
+    ],
+    [
+      285,
+      292
+    ],
+    [
+      299,
+      292
+    ],
+    [
+      299,
+      215
+    ],
+    [
+      333,
+      188
+    ],
+    [
+      409,
+      188
+    ],
+    [
+      425,
+      173
+    ],
+    [
+      425,
+      153
+    ],
+    [
+      399,
+      153
+    ],
+    [
+      399,
+      67
+    ],
+    [
+      447,
+      67
+    ],
+    [
+      447,
+      35
+    ],
+    [
+      526,
+      35
+    ]
+  ],
+  "rooms": [
+    {
+      "id": "defender",
+      "label": "DEFENDER SPAWN",
+      "polygon": [
+        [
+          533,
+          20
+        ],
+        [
+          590,
+          20
+        ],
+        [
+          590,
+          33
+        ],
+        [
+          668,
+          33
+        ],
+        [
+          668,
+          20
+        ],
+        [
+          727,
+          20
+        ],
+        [
+          727,
+          135
+        ],
+        [
+          660,
+          135
+        ],
+        [
+          660,
+          156
+        ],
+        [
+          611,
+          156
+        ],
+        [
+          611,
+          137
+        ],
+        [
+          543,
+          137
+        ],
+        [
+          543,
+          100
+        ],
+        [
+          532,
+          100
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "tile"
+    },
+    {
+      "id": "security",
+      "label": "SECURITY & OPS",
+      "polygon": [
+        [
+          405,
+          74
+        ],
+        [
+          453,
+          74
+        ],
+        [
+          453,
+          42
+        ],
+        [
+          531,
+          42
+        ],
+        [
+          531,
+          163
+        ],
+        [
+          453,
+          163
+        ],
+        [
+          453,
+          174
+        ],
+        [
+          429,
+          174
+        ],
+        [
+          429,
+          149
+        ],
+        [
+          405,
+          149
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "lockers",
+      "label": "LOCKERS",
+      "polygon": [
+        [
+          738,
+          73
+        ],
+        [
+          813,
+          73
+        ],
+        [
+          826,
+          86
+        ],
+        [
+          826,
+          171
+        ],
+        [
+          738,
+          171
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "ticket-north",
+      "label": "TICKET HALL (NORTH)",
+      "polygon": [
+        [
+          520,
+          155
+        ],
+        [
+          608,
+          155
+        ],
+        [
+          608,
+          137
+        ],
+        [
+          660,
+          137
+        ],
+        [
+          660,
+          155
+        ],
+        [
+          768,
+          155
+        ],
+        [
+          768,
+          287
+        ],
+        [
+          715,
+          287
+        ],
+        [
+          715,
+          274
+        ],
+        [
+          687,
+          274
+        ],
+        [
+          687,
+          297
+        ],
+        [
+          580,
+          297
+        ],
+        [
+          580,
+          274
+        ],
+        [
+          554,
+          274
+        ],
+        [
+          554,
+          287
+        ],
+        [
+          520,
+          287
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "tile"
+    },
+    {
+      "id": "staff-access",
+      "label": "STAFF ACCESS",
+      "polygon": [
+        [
+          339,
+          196
+        ],
+        [
+          411,
+          196
+        ],
+        [
+          411,
+          276
+        ],
+        [
+          351,
+          276
+        ],
+        [
+          351,
+          330
+        ],
+        [
+          308,
+          330
+        ],
+        [
+          308,
+          221
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "control-room",
+      "label": "CONTROL ROOM",
+      "polygon": [
+        [
+          818,
+          186
+        ],
+        [
+          930,
+          186
+        ],
+        [
+          930,
+          258
+        ],
+        [
+          900,
+          258
+        ],
+        [
+          900,
+          274
+        ],
+        [
+          840,
+          274
+        ],
+        [
+          840,
+          265
+        ],
+        [
+          818,
+          265
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "power-substation",
+      "label": "POWER SUBSTATION",
+      "polygon": [
+        [
+          944,
+          235
+        ],
+        [
+          1007,
+          235
+        ],
+        [
+          1039,
+          264
+        ],
+        [
+          1039,
+          351
+        ],
+        [
+          1000,
+          351
+        ],
+        [
+          1000,
+          340
+        ],
+        [
+          944,
+          340
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "a-site",
+      "label": "A SITE (PLATFORM OPS)",
+      "polygon": [
+        [
+          338,
+          477
+        ],
+        [
+          365,
+          477
+        ],
+        [
+          365,
+          443
+        ],
+        [
+          445,
+          443
+        ],
+        [
+          445,
+          489
+        ],
+        [
+          485,
+          489
+        ],
+        [
+          485,
+          594
+        ],
+        [
+          494,
+          594
+        ],
+        [
+          494,
+          631
+        ],
+        [
+          451,
+          631
+        ],
+        [
+          451,
+          658
+        ],
+        [
+          418,
+          658
+        ],
+        [
+          418,
+          632
+        ],
+        [
+          355,
+          632
+        ],
+        [
+          355,
+          594
+        ],
+        [
+          332,
+          594
+        ],
+        [
+          332,
+          548
+        ],
+        [
+          317,
+          548
+        ],
+        [
+          317,
+          479
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "b-site",
+      "label": "B SITE (SERVICE DEPOT)",
+      "polygon": [
+        [
+          843,
+          464
+        ],
+        [
+          944,
+          464
+        ],
+        [
+          944,
+          533
+        ],
+        [
+          977,
+          550
+        ],
+        [
+          977,
+          658
+        ],
+        [
+          941,
+          658
+        ],
+        [
+          941,
+          686
+        ],
+        [
+          929,
+          686
+        ],
+        [
+          929,
+          717
+        ],
+        [
+          842,
+          717
+        ],
+        [
+          842,
+          685
+        ],
+        [
+          800,
+          685
+        ],
+        [
+          800,
+          659
+        ],
+        [
+          780,
+          659
+        ],
+        [
+          780,
+          633
+        ],
+        [
+          763,
+          633
+        ],
+        [
+          763,
+          595
+        ],
+        [
+          780,
+          595
+        ],
+        [
+          780,
+          499
+        ],
+        [
+          813,
+          499
+        ],
+        [
+          813,
+          488
+        ],
+        [
+          843,
+          488
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "workshop",
+      "label": "WORKSHOP",
+      "polygon": [
+        [
+          314,
+          666
+        ],
+        [
+          416,
+          666
+        ],
+        [
+          416,
+          709
+        ],
+        [
+          448,
+          709
+        ],
+        [
+          448,
+          748
+        ],
+        [
+          392,
+          748
+        ],
+        [
+          392,
+          755
+        ],
+        [
+          314,
+          755
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "train-maintenance",
+      "label": "TRAIN MAINTENANCE BAY",
+      "polygon": [
+        [
+          270,
+          801
+        ],
+        [
+          393,
+          801
+        ],
+        [
+          393,
+          821
+        ],
+        [
+          444,
+          821
+        ],
+        [
+          444,
+          924
+        ],
+        [
+          425,
+          943
+        ],
+        [
+          285,
+          943
+        ],
+        [
+          256,
+          916
+        ],
+        [
+          256,
+          871
+        ],
+        [
+          270,
+          871
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "hvac",
+      "label": "HVAC / UTILITIES",
+      "polygon": [
+        [
+          833,
+          758
+        ],
+        [
+          860,
+          758
+        ],
+        [
+          860,
+          770
+        ],
+        [
+          961,
+          770
+        ],
+        [
+          961,
+          871
+        ],
+        [
+          918,
+          871
+        ],
+        [
+          918,
+          889
+        ],
+        [
+          880,
+          889
+        ],
+        [
+          880,
+          881
+        ],
+        [
+          833,
+          881
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "waste-tunnel",
+      "label": "WASTE TUNNEL",
+      "polygon": [
+        [
+          871,
+          890
+        ],
+        [
+          918,
+          890
+        ],
+        [
+          918,
+          973
+        ],
+        [
+          862,
+          973
+        ],
+        [
+          862,
+          912
+        ],
+        [
+          871,
+          912
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "concrete"
+    },
+    {
+      "id": "ticket-south",
+      "label": "TICKET HALL (SOUTH)",
+      "polygon": [
+        [
+          521,
+          847
+        ],
+        [
+          553,
+          847
+        ],
+        [
+          553,
+          829
+        ],
+        [
+          580,
+          829
+        ],
+        [
+          580,
+          816
+        ],
+        [
+          665,
+          816
+        ],
+        [
+          665,
+          829
+        ],
+        [
+          690,
+          829
+        ],
+        [
+          690,
+          847
+        ],
+        [
+          768,
+          847
+        ],
+        [
+          768,
+          959
+        ],
+        [
+          662,
+          959
+        ],
+        [
+          662,
+          937
+        ],
+        [
+          610,
+          937
+        ],
+        [
+          610,
+          959
+        ],
+        [
+          521,
+          959
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "tile"
+    },
+    {
+      "id": "attacker",
+      "label": "ATTACKER SPAWN",
+      "polygon": [
+        [
+          527,
+          966
+        ],
+        [
+          609,
+          966
+        ],
+        [
+          609,
+          936
+        ],
+        [
+          660,
+          936
+        ],
+        [
+          660,
+          966
+        ],
+        [
+          750,
+          966
+        ],
+        [
+          750,
+          1027
+        ],
+        [
+          803,
+          1027
+        ],
+        [
+          803,
+          1130
+        ],
+        [
+          748,
+          1130
+        ],
+        [
+          748,
+          1156
+        ],
+        [
+          528,
+          1156
+        ],
+        [
+          528,
+          1133
+        ],
+        [
+          490,
+          1133
+        ],
+        [
+          490,
+          1050
+        ],
+        [
+          431,
+          1050
+        ],
+        [
+          431,
+          1020
+        ],
+        [
+          483,
+          1020
+        ],
+        [
+          483,
+          1033
+        ],
+        [
+          521,
+          1033
+        ]
+      ],
+      "floorY": 0,
+      "wallHeight": 4.2,
+      "material": "tile"
+    }
+  ],
+  "wallRuns": [
+    {
+      "room": "defender",
+      "points": [
+        [
+          533,
+          20
+        ],
+        [
+          590,
+          20
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          590,
+          20
+        ],
+        [
+          590,
+          33
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          590,
+          33
+        ],
+        [
+          668,
+          33
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          668,
+          33
+        ],
+        [
+          668,
+          20
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          668,
+          20
+        ],
+        [
+          727,
+          20
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          727,
+          20
+        ],
+        [
+          727,
+          135
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          727,
+          135
+        ],
+        [
+          660,
+          135
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          660,
+          135
+        ],
+        [
+          660,
+          156
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          660,
+          156
+        ],
+        [
+          657.5,
+          156.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          612.5,
+          156.0
+        ],
+        [
+          611,
+          156
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          611,
+          156
+        ],
+        [
+          611,
+          137
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          611,
+          137
+        ],
+        [
+          543,
+          137
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          543,
+          137
+        ],
+        [
+          543,
+          100
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          543,
+          100
+        ],
+        [
+          532,
+          100
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "defender",
+      "points": [
+        [
+          532,
+          100
+        ],
+        [
+          533,
+          20
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          405,
+          74
+        ],
+        [
+          453,
+          74
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          453,
+          74
+        ],
+        [
+          453,
+          42
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          453,
+          42
+        ],
+        [
+          531,
+          42
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          531,
+          42
+        ],
+        [
+          531.0,
+          138.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          531,
+          163
+        ],
+        [
+          453,
+          163
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          453,
+          163
+        ],
+        [
+          453,
+          174
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          453,
+          174
+        ],
+        [
+          429,
+          174
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          429.0,
+          152.5
+        ],
+        [
+          429,
+          149
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          429,
+          149
+        ],
+        [
+          405,
+          149
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "security",
+      "points": [
+        [
+          405,
+          149
+        ],
+        [
+          405,
+          74
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "lockers",
+      "points": [
+        [
+          738,
+          73
+        ],
+        [
+          813,
+          73
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "lockers",
+      "points": [
+        [
+          813,
+          73
+        ],
+        [
+          826,
+          86
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "lockers",
+      "points": [
+        [
+          826,
+          86
+        ],
+        [
+          826,
+          171
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "lockers",
+      "points": [
+        [
+          826,
+          171
+        ],
+        [
+          738,
+          171
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "lockers",
+      "points": [
+        [
+          738,
+          171
+        ],
+        [
+          738.0,
+          166.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "lockers",
+      "points": [
+        [
+          738.0,
+          136.0
+        ],
+        [
+          738,
+          73
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          520,
+          155
+        ],
+        [
+          608,
+          155
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          608,
+          155
+        ],
+        [
+          608,
+          137
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          608,
+          137
+        ],
+        [
+          612.0,
+          137.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          658.0,
+          137.0
+        ],
+        [
+          660,
+          137
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          660,
+          137
+        ],
+        [
+          660,
+          155
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          660,
+          155
+        ],
+        [
+          768,
+          155
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          768,
+          155
+        ],
+        [
+          768.0,
+          248.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          768.0,
+          283.5
+        ],
+        [
+          768,
+          287
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          768,
+          287
+        ],
+        [
+          755.0,
+          287.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          717.0,
+          287.0
+        ],
+        [
+          715,
+          287
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          715,
+          287
+        ],
+        [
+          715,
+          274
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          715,
+          274
+        ],
+        [
+          687,
+          274
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          687,
+          274
+        ],
+        [
+          687,
+          297
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          687,
+          297
+        ],
+        [
+          658.0,
+          297.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          612.0,
+          297.0
+        ],
+        [
+          580,
+          297
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          580,
+          297
+        ],
+        [
+          580,
+          274
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          580,
+          274
+        ],
+        [
+          554,
+          274
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          554,
+          274
+        ],
+        [
+          554,
+          287
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          520,
+          287
+        ],
+        [
+          520.0,
+          283.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-north",
+      "points": [
+        [
+          520.0,
+          248.5
+        ],
+        [
+          520,
+          155
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          339,
+          196
+        ],
+        [
+          411,
+          196
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          411,
+          196
+        ],
+        [
+          411.0,
+          216.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          411.0,
+          243.5
+        ],
+        [
+          411,
+          276
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          411,
+          276
+        ],
+        [
+          351,
+          276
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          351,
+          276
+        ],
+        [
+          351,
+          330
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          351,
+          330
+        ],
+        [
+          346.5,
+          330.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          311.5,
+          330.0
+        ],
+        [
+          308,
+          330
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          308,
+          330
+        ],
+        [
+          308,
+          221
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "staff-access",
+      "points": [
+        [
+          308,
+          221
+        ],
+        [
+          339,
+          196
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          818,
+          186
+        ],
+        [
+          930,
+          186
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          930,
+          186
+        ],
+        [
+          930,
+          258
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          930,
+          258
+        ],
+        [
+          912.5,
+          258.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          900,
+          258
+        ],
+        [
+          900,
+          274
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          900,
+          274
+        ],
+        [
+          840,
+          274
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          840,
+          274
+        ],
+        [
+          840,
+          265
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          840,
+          265
+        ],
+        [
+          818,
+          265
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "control-room",
+      "points": [
+        [
+          818,
+          265
+        ],
+        [
+          818,
+          186
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          944,
+          235
+        ],
+        [
+          1007,
+          235
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          1007,
+          235
+        ],
+        [
+          1039,
+          264
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          1039,
+          264
+        ],
+        [
+          1039,
+          351
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          1039,
+          351
+        ],
+        [
+          1030.0,
+          351.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          1002.0,
+          351.0
+        ],
+        [
+          1000,
+          351
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          1000,
+          351
+        ],
+        [
+          1000,
+          340
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          1000,
+          340
+        ],
+        [
+          944,
+          340
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          944,
+          340
+        ],
+        [
+          944.0,
+          295.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "power-substation",
+      "points": [
+        [
+          944.0,
+          267.0
+        ],
+        [
+          944,
+          235
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          338,
+          477
+        ],
+        [
+          365,
+          477
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          365,
+          477
+        ],
+        [
+          365,
+          443
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          365,
+          443
+        ],
+        [
+          410.5,
+          443.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          445,
+          443
+        ],
+        [
+          445,
+          489
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          445,
+          489
+        ],
+        [
+          485,
+          489
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          485,
+          489
+        ],
+        [
+          485,
+          594
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          485,
+          594
+        ],
+        [
+          494,
+          594
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          494,
+          594
+        ],
+        [
+          494.0,
+          595.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          494,
+          631
+        ],
+        [
+          451,
+          631
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          451,
+          631
+        ],
+        [
+          451,
+          658
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          451,
+          658
+        ],
+        [
+          448.0,
+          658.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          420.0,
+          658.0
+        ],
+        [
+          418,
+          658
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          418,
+          658
+        ],
+        [
+          418,
+          632
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          418,
+          632
+        ],
+        [
+          355,
+          632
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          355,
+          632
+        ],
+        [
+          355,
+          594
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          355,
+          594
+        ],
+        [
+          332,
+          594
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          332,
+          594
+        ],
+        [
+          332,
+          548
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          332,
+          548
+        ],
+        [
+          317,
+          548
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          317,
+          548
+        ],
+        [
+          317,
+          479
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "a-site",
+      "points": [
+        [
+          317,
+          479
+        ],
+        [
+          338,
+          477
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          843,
+          464
+        ],
+        [
+          944,
+          464
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          944,
+          464
+        ],
+        [
+          944,
+          533
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          944,
+          533
+        ],
+        [
+          977,
+          550
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          977,
+          550
+        ],
+        [
+          977,
+          658
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          977,
+          658
+        ],
+        [
+          941,
+          658
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          941,
+          658
+        ],
+        [
+          941,
+          686
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          941,
+          686
+        ],
+        [
+          929,
+          686
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          929,
+          686
+        ],
+        [
+          929,
+          717
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          929,
+          717
+        ],
+        [
+          842,
+          717
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          842,
+          717
+        ],
+        [
+          842.0,
+          702.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          842,
+          685
+        ],
+        [
+          800,
+          685
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          800,
+          685
+        ],
+        [
+          800,
+          659
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          800,
+          659
+        ],
+        [
+          780,
+          659
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          780,
+          659
+        ],
+        [
+          780,
+          633
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          780,
+          633
+        ],
+        [
+          763,
+          633
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          763,
+          595
+        ],
+        [
+          780,
+          595
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          780,
+          595
+        ],
+        [
+          780,
+          499
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          780,
+          499
+        ],
+        [
+          813,
+          499
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          813,
+          499
+        ],
+        [
+          813,
+          488
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          813,
+          488
+        ],
+        [
+          814.0,
+          488.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "b-site",
+      "points": [
+        [
+          843,
+          488
+        ],
+        [
+          843,
+          464
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          314,
+          666
+        ],
+        [
+          416,
+          666
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          416,
+          666
+        ],
+        [
+          416.0,
+          676.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          416.0,
+          701.5
+        ],
+        [
+          416,
+          709
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          416,
+          709
+        ],
+        [
+          448,
+          709
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          448,
+          709
+        ],
+        [
+          448,
+          748
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          413.0,
+          748.0
+        ],
+        [
+          392,
+          748
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          392,
+          748
+        ],
+        [
+          392,
+          755
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          392,
+          755
+        ],
+        [
+          314,
+          755
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "workshop",
+      "points": [
+        [
+          314,
+          755
+        ],
+        [
+          314,
+          666
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          270,
+          801
+        ],
+        [
+          347.5,
+          801.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          382.5,
+          801.0
+        ],
+        [
+          393,
+          801
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          393,
+          801
+        ],
+        [
+          393,
+          821
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          393,
+          821
+        ],
+        [
+          444,
+          821
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          444,
+          821
+        ],
+        [
+          444.0,
+          842.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          444.0,
+          877.5
+        ],
+        [
+          444,
+          924
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          444,
+          924
+        ],
+        [
+          425,
+          943
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          425,
+          943
+        ],
+        [
+          285,
+          943
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          285,
+          943
+        ],
+        [
+          256,
+          916
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          256,
+          916
+        ],
+        [
+          256,
+          871
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          256,
+          871
+        ],
+        [
+          270,
+          871
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "train-maintenance",
+      "points": [
+        [
+          270,
+          871
+        ],
+        [
+          270,
+          801
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          833,
+          758
+        ],
+        [
+          844.5,
+          758.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          860,
+          758
+        ],
+        [
+          860,
+          770
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          860,
+          770
+        ],
+        [
+          961,
+          770
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          961,
+          770
+        ],
+        [
+          961,
+          871
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          961,
+          871
+        ],
+        [
+          918,
+          871
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          918,
+          871
+        ],
+        [
+          918,
+          889
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          918,
+          889
+        ],
+        [
+          880,
+          889
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          880,
+          881
+        ],
+        [
+          833,
+          881
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "hvac",
+      "points": [
+        [
+          833,
+          881
+        ],
+        [
+          833,
+          758
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          871,
+          890
+        ],
+        [
+          918,
+          890
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          918,
+          890
+        ],
+        [
+          918,
+          973
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          918,
+          973
+        ],
+        [
+          862,
+          973
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          862,
+          973
+        ],
+        [
+          862.0,
+          959.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          862.0,
+          931.0
+        ],
+        [
+          862,
+          912
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          862,
+          912
+        ],
+        [
+          871,
+          912
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "waste-tunnel",
+      "points": [
+        [
+          871,
+          912
+        ],
+        [
+          871,
+          890
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          553,
+          847
+        ],
+        [
+          553,
+          829
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          553,
+          829
+        ],
+        [
+          580,
+          829
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          580,
+          829
+        ],
+        [
+          580,
+          816
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          580,
+          816
+        ],
+        [
+          612.0,
+          816.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          658.0,
+          816.0
+        ],
+        [
+          665,
+          816
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          665,
+          816
+        ],
+        [
+          665,
+          829
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          665,
+          829
+        ],
+        [
+          690,
+          829
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          690,
+          829
+        ],
+        [
+          690,
+          847
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          690,
+          847
+        ],
+        [
+          717.0,
+          847.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          755.0,
+          847.0
+        ],
+        [
+          768,
+          847
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          768,
+          847
+        ],
+        [
+          768.0,
+          858.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          768.0,
+          893.5
+        ],
+        [
+          768,
+          959
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          768,
+          959
+        ],
+        [
+          662,
+          959
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          662,
+          959
+        ],
+        [
+          662,
+          937
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          662,
+          937
+        ],
+        [
+          657.0,
+          937.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          613.0,
+          937.0
+        ],
+        [
+          610,
+          937
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          610,
+          937
+        ],
+        [
+          610,
+          959
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          610,
+          959
+        ],
+        [
+          521,
+          959
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          521,
+          959
+        ],
+        [
+          521.0,
+          893.5
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "ticket-south",
+      "points": [
+        [
+          521.0,
+          858.5
+        ],
+        [
+          521,
+          847
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          527,
+          966
+        ],
+        [
+          609,
+          966
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          609,
+          966
+        ],
+        [
+          609,
+          936
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          609,
+          936
+        ],
+        [
+          613.0,
+          936.0
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          657.0,
+          936.0
+        ],
+        [
+          660,
+          936
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          660,
+          936
+        ],
+        [
+          660,
+          966
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          660,
+          966
+        ],
+        [
+          750,
+          966
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          750,
+          966
+        ],
+        [
+          750,
+          1027
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          750,
+          1027
+        ],
+        [
+          803,
+          1027
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          803.0,
+          1054.0
+        ],
+        [
+          803,
+          1130
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          803,
+          1130
+        ],
+        [
+          748,
+          1130
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          748,
+          1130
+        ],
+        [
+          748,
+          1156
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          748,
+          1156
+        ],
+        [
+          528,
+          1156
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          528,
+          1156
+        ],
+        [
+          528,
+          1133
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          528,
+          1133
+        ],
+        [
+          490,
+          1133
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          490,
+          1133
+        ],
+        [
+          490,
+          1050
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          490,
+          1050
+        ],
+        [
+          431,
+          1050
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          431,
+          1050
+        ],
+        [
+          431,
+          1020
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          431,
+          1020
+        ],
+        [
+          483,
+          1020
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          483,
+          1020
+        ],
+        [
+          483,
+          1033
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          483,
+          1033
+        ],
+        [
+          521,
+          1033
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "attacker",
+      "points": [
+        [
+          521,
+          1033
+        ],
+        [
+          527,
+          966
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.6
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          477,
+          304
+        ],
+        [
+          477,
+          357
+        ],
+        [
+          486,
+          357
+        ],
+        [
+          486,
+          489
+        ],
+        [
+          488,
+          489
+        ],
+        [
+          488,
+          594
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          488,
+          631
+        ],
+        [
+          453,
+          631
+        ],
+        [
+          453,
+          705
+        ],
+        [
+          488,
+          705
+        ],
+        [
+          488,
+          837
+        ],
+        [
+          516,
+          837
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          786,
+          304
+        ],
+        [
+          786,
+          388
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          786,
+          426
+        ],
+        [
+          811,
+          426
+        ],
+        [
+          811,
+          460
+        ],
+        [
+          786,
+          460
+        ],
+        [
+          786,
+          556
+        ],
+        [
+          760,
+          556
+        ],
+        [
+          760,
+          593
+        ],
+        [
+          776,
+          593
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          776,
+          633
+        ],
+        [
+          800,
+          633
+        ],
+        [
+          800,
+          680
+        ],
+        [
+          824,
+          680
+        ],
+        [
+          824,
+          753
+        ],
+        [
+          792,
+          753
+        ],
+        [
+          792,
+          837
+        ],
+        [
+          754,
+          837
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          554,
+          289
+        ],
+        [
+          554,
+          275
+        ],
+        [
+          579,
+          275
+        ],
+        [
+          579,
+          296
+        ],
+        [
+          611,
+          296
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "platform-core",
+      "points": [
+        [
+          662,
+          296
+        ],
+        [
+          687,
+          296
+        ],
+        [
+          687,
+          275
+        ],
+        [
+          713,
+          275
+        ],
+        [
+          713,
+          289
+        ]
+      ],
+      "height": 4.2,
+      "thickness": 0.65
+    },
+    {
+      "room": "rail-curb",
+      "points": [
+        [
+          568,
+          300
+        ],
+        [
+          568,
+          846
+        ]
+      ],
+      "height": 0.35,
+      "thickness": 0.24
+    },
+    {
+      "room": "rail-curb",
+      "points": [
+        [
+          705,
+          300
+        ],
+        [
+          705,
+          846
+        ]
+      ],
+      "height": 0.35,
+      "thickness": 0.24
+    }
+  ],
+  "doors": [
+    {
+      "room": "defender",
+      "at": [
+        635.0,
+        156.0
+      ],
+      "widthPx": 45,
+      "height": 2.7,
+      "edge": 8
+    },
+    {
+      "room": "security",
+      "at": [
+        531.0,
+        151.0
+      ],
+      "widthPx": 25,
+      "height": 2.7,
+      "edge": 3
+    },
+    {
+      "room": "security",
+      "at": [
+        429.0,
+        164.0
+      ],
+      "widthPx": 23,
+      "height": 2.7,
+      "edge": 7
+    },
+    {
+      "room": "lockers",
+      "at": [
+        738.0,
+        151.0
+      ],
+      "widthPx": 30,
+      "height": 2.7,
+      "edge": 4
+    },
+    {
+      "room": "ticket-north",
+      "at": [
+        635.0,
+        137.0
+      ],
+      "widthPx": 46,
+      "height": 2.7,
+      "edge": 2
+    },
+    {
+      "room": "ticket-north",
+      "at": [
+        520.0,
+        266.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 15
+    },
+    {
+      "room": "ticket-north",
+      "at": [
+        768.0,
+        266.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 5
+    },
+    {
+      "room": "ticket-north",
+      "at": [
+        535.0,
+        287.0
+      ],
+      "widthPx": 38,
+      "height": 2.7,
+      "edge": 14
+    },
+    {
+      "room": "ticket-north",
+      "at": [
+        635.0,
+        297.0
+      ],
+      "widthPx": 46,
+      "height": 2.7,
+      "edge": 10
+    },
+    {
+      "room": "ticket-north",
+      "at": [
+        736.0,
+        287.0
+      ],
+      "widthPx": 38,
+      "height": 2.7,
+      "edge": 6
+    },
+    {
+      "room": "staff-access",
+      "at": [
+        329.0,
+        330.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 4
+    },
+    {
+      "room": "staff-access",
+      "at": [
+        411.0,
+        230.0
+      ],
+      "widthPx": 27,
+      "height": 2.7,
+      "edge": 1
+    },
+    {
+      "room": "control-room",
+      "at": [
+        900,
+        258
+      ],
+      "widthPx": 25,
+      "height": 2.7,
+      "edge": 2
+    },
+    {
+      "room": "power-substation",
+      "at": [
+        944.0,
+        281.0
+      ],
+      "widthPx": 28,
+      "height": 2.7,
+      "edge": 6
+    },
+    {
+      "room": "power-substation",
+      "at": [
+        1016.0,
+        351.0
+      ],
+      "widthPx": 28,
+      "height": 2.7,
+      "edge": 3
+    },
+    {
+      "room": "a-site",
+      "at": [
+        428.0,
+        443.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 2
+    },
+    {
+      "room": "a-site",
+      "at": [
+        494.0,
+        614.0
+      ],
+      "widthPx": 37,
+      "height": 2.7,
+      "edge": 7
+    },
+    {
+      "room": "a-site",
+      "at": [
+        434.0,
+        658.0
+      ],
+      "widthPx": 28,
+      "height": 2.7,
+      "edge": 10
+    },
+    {
+      "room": "b-site",
+      "at": [
+        830.0,
+        488.0
+      ],
+      "widthPx": 32,
+      "height": 2.7,
+      "edge": 20
+    },
+    {
+      "room": "b-site",
+      "at": [
+        763.0,
+        614.0
+      ],
+      "widthPx": 38,
+      "height": 2.7,
+      "edge": 15
+    },
+    {
+      "room": "b-site",
+      "at": [
+        842,
+        685
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 9
+    },
+    {
+      "room": "workshop",
+      "at": [
+        430.0,
+        748.0
+      ],
+      "widthPx": 34,
+      "height": 2.7,
+      "edge": 4
+    },
+    {
+      "room": "workshop",
+      "at": [
+        416.0,
+        689.0
+      ],
+      "widthPx": 25,
+      "height": 2.7,
+      "edge": 1
+    },
+    {
+      "room": "train-maintenance",
+      "at": [
+        444.0,
+        860.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 3
+    },
+    {
+      "room": "train-maintenance",
+      "at": [
+        365.0,
+        801.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 0
+    },
+    {
+      "room": "hvac",
+      "at": [
+        860,
+        758
+      ],
+      "widthPx": 31,
+      "height": 2.7,
+      "edge": 0
+    },
+    {
+      "room": "hvac",
+      "at": [
+        880,
+        881
+      ],
+      "widthPx": 27,
+      "height": 2.7,
+      "edge": 7
+    },
+    {
+      "room": "waste-tunnel",
+      "at": [
+        862.0,
+        945.0
+      ],
+      "widthPx": 28,
+      "height": 2.7,
+      "edge": 3
+    },
+    {
+      "room": "ticket-south",
+      "at": [
+        535.0,
+        847.0
+      ],
+      "widthPx": 38,
+      "height": 2.7,
+      "edge": 0
+    },
+    {
+      "room": "ticket-south",
+      "at": [
+        635.0,
+        816.0
+      ],
+      "widthPx": 46,
+      "height": 2.7,
+      "edge": 4
+    },
+    {
+      "room": "ticket-south",
+      "at": [
+        736.0,
+        847.0
+      ],
+      "widthPx": 38,
+      "height": 2.7,
+      "edge": 8
+    },
+    {
+      "room": "ticket-south",
+      "at": [
+        521.0,
+        876.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 15
+    },
+    {
+      "room": "ticket-south",
+      "at": [
+        768.0,
+        876.0
+      ],
+      "widthPx": 35,
+      "height": 2.7,
+      "edge": 9
+    },
+    {
+      "room": "ticket-south",
+      "at": [
+        635.0,
+        937.0
+      ],
+      "widthPx": 44,
+      "height": 2.7,
+      "edge": 12
+    },
+    {
+      "room": "attacker",
+      "at": [
+        635.0,
+        936.0
+      ],
+      "widthPx": 44,
+      "height": 2.7,
+      "edge": 2
+    },
+    {
+      "room": "attacker",
+      "at": [
+        803.0,
+        1041.0
+      ],
+      "widthPx": 26,
+      "height": 2.7,
+      "edge": 7
+    }
+  ],
+  "tracks": [
+    {
+      "id": "west-track",
+      "rect": [
+        570,
+        300,
+        46,
+        546
+      ],
+      "floorY": -1.2,
+      "railsX": [
+        576,
+        611
+      ],
+      "sleepersEveryPx": 12
+    },
+    {
+      "id": "east-track",
+      "rect": [
+        657,
+        300,
+        47,
+        546
+      ],
+      "floorY": -1.2,
+      "railsX": [
+        662,
+        698
+      ],
+      "sleepersEveryPx": 12
+    }
+  ],
+  "centerLane": {
+    "rect": [
+      616,
+      300,
+      41,
+      546
+    ],
+    "floorY": -0.8,
+    "label": "MAIN PLATFORM LANE"
+  },
+  "trains": [
+    {
+      "id": "west-train",
+      "rect": [
+        579,
+        357,
+        31,
+        462
+      ],
+      "y": -0.9,
+      "height": 3.8,
+      "cars": 3,
+      "axis": "pixelY",
+      "frontPixelY": 819,
+      "color": "steel-blue"
+    },
+    {
+      "id": "east-train",
+      "rect": [
+        663,
+        317,
+        32,
+        452
+      ],
+      "y": -0.9,
+      "height": 3.8,
+      "cars": 3,
+      "axis": "pixelY",
+      "frontPixelY": 317,
+      "color": "steel-blue"
+    }
+  ],
+  "bridge": {
+    "id": "platform-bridge",
+    "label": "PLATFORM BRIDGE",
+    "rect": [
+      472,
+      610,
+      327,
+      45
+    ],
+    "floorY": 3.4,
+    "railHeight": 1.1,
+    "doors": [
+      [
+        493,
+        617
+      ],
+      [
+        778,
+        617
+      ]
+    ],
+    "caveat": "Bridge height inferred. End access is not clearly drawn: compact access ramps or a low bridge are more faithful than large invented stairs."
+  },
+  "routes": [
+    {
+      "id": "main-west",
+      "label": "PLATFORM (WEST)",
+      "width": 60,
+      "points": [
+        [
+          532,
+          816
+        ],
+        [
+          532,
+          349
+        ]
+      ],
+      "kind": "main"
+    },
+    {
+      "id": "main-center",
+      "label": "MAIN PLATFORM LANE",
+      "width": 35,
+      "points": [
+        [
+          637,
+          815
+        ],
+        [
+          637,
+          326
+        ]
+      ],
+      "kind": "main"
+    },
+    {
+      "id": "main-east",
+      "label": "PLATFORM (EAST)",
+      "width": 60,
+      "points": [
+        [
+          735,
+          815
+        ],
+        [
+          735,
+          347
+        ]
+      ],
+      "kind": "main"
+    },
+    {
+      "id": "west-maintenance",
+      "label": "MAINTENANCE TUNNEL (WEST)",
+      "width": 29,
+      "points": [
+        [
+          321,
+          367
+        ],
+        [
+          320,
+          418
+        ],
+        [
+          290,
+          469
+        ],
+        [
+          290,
+          622
+        ],
+        [
+          284,
+          683
+        ],
+        [
+          284,
+          742
+        ],
+        [
+          296,
+          775
+        ],
+        [
+          367,
+          777
+        ]
+      ],
+      "kind": "flank"
+    },
+    {
+      "id": "northwest-rotation",
+      "width": 34,
+      "points": [
+        [
+          493,
+          264
+        ],
+        [
+          465,
+          265
+        ],
+        [
+          445,
+          290
+        ],
+        [
+          445,
+          332
+        ],
+        [
+          429,
+          362
+        ],
+        [
+          426,
+          391
+        ],
+        [
+          401,
+          408
+        ],
+        [
+          366,
+          407
+        ],
+        [
+          339,
+          430
+        ],
+        [
+          333,
+          456
+        ]
+      ],
+      "kind": "rotation"
+    },
+    {
+      "id": "northeast-rotation",
+      "width": 34,
+      "points": [
+        [
+          790,
+          266
+        ],
+        [
+          802,
+          285
+        ],
+        [
+          833,
+          299
+        ],
+        [
+          872,
+          300
+        ],
+        [
+          896,
+          320
+        ],
+        [
+          900,
+          347
+        ]
+      ],
+      "kind": "rotation"
+    },
+    {
+      "id": "east-service",
+      "label": "SERVICE TUNNEL (EAST)",
+      "width": 32,
+      "points": [
+        [
+          790,
+          405
+        ],
+        [
+          841,
+          405
+        ],
+        [
+          946,
+          405
+        ],
+        [
+          983,
+          420
+        ],
+        [
+          986,
+          467
+        ],
+        [
+          983,
+          513
+        ],
+        [
+          1001,
+          572
+        ],
+        [
+          1001,
+          685
+        ],
+        [
+          997,
+          730
+        ],
+        [
+          978,
+          751
+        ],
+        [
+          922,
+          750
+        ],
+        [
+          891,
+          772
+        ]
+      ],
+      "kind": "flank"
+    },
+    {
+      "id": "southwest-rotation",
+      "width": 33,
+      "points": [
+        [
+          491,
+          877
+        ],
+        [
+          461,
+          874
+        ],
+        [
+          441,
+          858
+        ],
+        [
+          440,
+          791
+        ],
+        [
+          440,
+          772
+        ]
+      ],
+      "kind": "rotation"
+    },
+    {
+      "id": "southeast-rotation",
+      "width": 33,
+      "points": [
+        [
+          780,
+          877
+        ],
+        [
+          819,
+          881
+        ],
+        [
+          842,
+          906
+        ],
+        [
+          842,
+          971
+        ],
+        [
+          793,
+          1028
+        ]
+      ],
+      "kind": "rotation"
+    }
+  ],
+  "spawns": [
+    {
+      "id": "defender",
+      "label": "DEFENDER SPAWN",
+      "at": [
+        638,
+        87
+      ],
+      "rect": [
+        546,
+        49,
+        178,
+        85
+      ],
+      "floorY": 0,
+      "team": "defender"
+    },
+    {
+      "id": "attacker",
+      "label": "ATTACKER SPAWN",
+      "at": [
+        638,
+        1080
+      ],
+      "rect": [
+        527,
+        963,
+        225,
+        192
+      ],
+      "floorY": 0,
+      "team": "attacker"
+    }
+  ],
+  "stairs": [
+    {
+      "id": "north-ticket-west",
+      "rect": [
+        597,
+        141,
+        14,
+        38
+      ],
+      "fromY": 0.8,
+      "toY": 0,
+      "direction": "south",
+      "confidence": "illustrated compact steps, height inferred"
+    },
+    {
+      "id": "north-ticket-east",
+      "rect": [
+        657,
+        141,
+        14,
+        38
+      ],
+      "fromY": 0.8,
+      "toY": 0,
+      "direction": "south",
+      "confidence": "illustrated compact steps, height inferred"
+    }
+  ],
+  "props": [
+    {
+      "kind": "turnstile-row",
+      "at": [
+        638,
+        261
+      ],
+      "count": 5,
+      "spacingPx": 21,
+      "axis": "x"
+    },
+    {
+      "kind": "turnstile-row",
+      "at": [
+        638,
+        852
+      ],
+      "count": 5,
+      "spacingPx": 21,
+      "axis": "x"
+    },
+    {
+      "kind": "planter",
+      "rect": [
+        550,
+        203,
+        20,
+        43
+      ]
+    },
+    {
+      "kind": "planter",
+      "rect": [
+        701,
+        203,
+        20,
+        43
+      ]
+    },
+    {
+      "kind": "planter",
+      "rect": [
+        550,
+        880,
+        20,
+        48
+      ]
+    },
+    {
+      "kind": "planter",
+      "rect": [
+        701,
+        880,
+        20,
+        48
+      ]
+    },
+    {
+      "kind": "server-bank",
+      "rect": [
+        825,
+        192,
+        64,
+        34
+      ]
+    },
+    {
+      "kind": "control-console",
+      "rect": [
+        823,
+        236,
+        60,
+        25
+      ]
+    },
+    {
+      "kind": "substation-equipment",
+      "rect": [
+        946,
+        273,
+        70,
+        63
+      ]
+    },
+    {
+      "kind": "red-pipe-bank",
+      "rect": [
+        935,
+        477,
+        33,
+        66
+      ]
+    },
+    {
+      "kind": "workbench",
+      "rect": [
+        320,
+        671,
+        87,
+        17
+      ]
+    },
+    {
+      "kind": "workbench",
+      "rect": [
+        320,
+        731,
+        84,
+        16
+      ]
+    },
+    {
+      "kind": "maintenance-locomotive",
+      "rect": [
+        319,
+        884,
+        77,
+        42
+      ],
+      "height": 2.2
+    },
+    {
+      "kind": "hvac-duct-bank",
+      "rect": [
+        837,
+        782,
+        23,
+        68
+      ]
+    },
+    {
+      "kind": "hvac-tank",
+      "at": [
+        864,
+        797
+      ],
+      "radiusPx": 14
+    },
+    {
+      "kind": "hvac-duct",
+      "rect": [
+        858,
+        845,
+        79,
+        18
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        379,
+        501,
+        27,
+        27
+      ]
+    },
+    {
+      "kind": "crate-stack",
+      "rect": [
+        425,
+        478,
+        40,
+        28
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        382,
+        563,
+        24,
+        25
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        401,
+        600,
+        30,
+        22
+      ]
+    },
+    {
+      "kind": "crate-stack",
+      "rect": [
+        834,
+        501,
+        24,
+        29
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        858,
+        551,
+        27,
+        25
+      ]
+    },
+    {
+      "kind": "crate-stack",
+      "rect": [
+        941,
+        573,
+        26,
+        41
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        891,
+        627,
+        29,
+        20
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        507,
+        412,
+        18,
+        26
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        521,
+        741,
+        35,
+        27
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        722,
+        341,
+        19,
+        29
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        716,
+        752,
+        29,
+        21
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        546,
+        1067,
+        22,
+        33
+      ]
+    },
+    {
+      "kind": "crate-stack",
+      "rect": [
+        722,
+        1085,
+        31,
+        30
+      ]
+    }
+  ],
+  "anchors": {
+    "defender": [
+      638,
+      87
+    ],
+    "ticket-north": [
+      636,
+      218
+    ],
+    "a-site": [
+      417,
+      541
+    ],
+    "b-site": [
+      894,
+      557
+    ],
+    "platform-west": [
+      532,
+      535
+    ],
+    "platform-east": [
+      735,
+      535
+    ],
+    "bridge": [
+      636,
+      633
+    ],
+    "ticket-south": [
+      636,
+      897
+    ],
+    "attacker": [
+      638,
+      1080
+    ],
+    "maintenance-west": [
+      284,
+      622
+    ],
+    "service-east": [
+      914,
+      401
+    ],
+    "staff-access": [
+      365,
+      250
+    ],
+    "security-ops": [
+      475,
+      122
+    ],
+    "lockers": [
+      777,
+      127
+    ],
+    "control-room": [
+      855,
+      233
+    ],
+    "power-substation": [
+      998,
+      290
+    ],
+    "workshop": [
+      388,
+      706
+    ],
+    "train-maintenance-bay": [
+      365,
+      851
+    ],
+    "hvac-utilities": [
+      899,
+      810
+    ],
+    "waste-tunnel": [
+      892,
+      945
+    ]
+  }
+}

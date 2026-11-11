@@ -1,0 +1,5 @@
+node_modules/
+.vite/
+dist/
+*.tgz
+.DS_Store
