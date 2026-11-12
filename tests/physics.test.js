@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import {MAPS,toWorld,levelSurfaces,stairProgress,rectPoly} from '../src/maps/atlas.js';
-import {floorGeometry,slabGeometry} from '../src/maps/geometry.js';
-import {buildMap,createMaterials} from '../src/maps/model.js';
-import {spawnPosition} from '../src/maps/navigation.js';
-import {PLAYER,createPhysicsWorld,stepPlayer,bodyIsClear,collisionCandidates,overlapsCollider} from '../src/maps/physics.js';
+import {MAPS,toWorld,levelSurfaces,stairProgress,rectPoly} from '../src/3dmap/maps/atlas.js';
+import {floorGeometry,slabGeometry} from '../src/3dmap/maps/geometry.js';
+import {buildMap,createMaterials} from '../src/3dmap/maps/model.js';
+import {spawnPosition} from '../src/3dmap/maps/navigation.js';
+import {PLAYER,createPhysicsWorld,stepPlayer,bodyIsClear,collisionCandidates,overlapsCollider} from '../src/3dmap/maps/physics.js';
 
 globalThis.document={createElement(){return{width:0,height:0,getContext(){return{fillRect(){},fillText(){},createRadialGradient(){return{addColorStop(){}}}}}}}};
 const models=new Map();

@@ -1,0 +1,14 @@
+import * as THREE from 'three';
+import {cloudNoiseVolume} from '../rendering/naturalFields.js';
+
+export function createCloudSea(mobile=false){
+  const volume=cloudNoiseVolume(),noise=new THREE.Data3DTexture(volume.data,volume.size,volume.size,volume.size);noise.format=THREE.RedFormat;noise.minFilter=noise.magFilter=THREE.LinearFilter;noise.wrapS=noise.wrapT=noise.wrapR=THREE.RepeatWrapping;noise.unpackAlignment=1;noise.needsUpdate=true;
+  const uniforms={cloudNoise:{value:noise},time:{value:0},night:{value:0},steps:{value:mobile?8:14},orthographic:{value:0},sunDirection:{value:new THREE.Vector3(-.5,.707,.5)}};
+  const material=new THREE.ShaderMaterial({glslVersion:THREE.GLSL3,uniforms,depthWrite:false,side:THREE.DoubleSide,
+    vertexShader:`out vec3 cloudWorld;void main(){cloudWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+    fragmentShader:`precision highp sampler3D;uniform sampler3D cloudNoise;uniform float time;uniform float night;uniform int steps;uniform float orthographic;uniform vec3 sunDirection;in vec3 cloudWorld;out vec4 cloudColor;
+      float density(vec3 p){vec3 q=p+vec3(time*.36,0.,time*.12);float n=texture(cloudNoise,q*.007).r*.65+texture(cloudNoise,q*.021).r*.25+texture(cloudNoise,q*.059).r*.1;float height=(p.y+55.)/37.;float shape=smoothstep(0.,.17,height)*(1.-smoothstep(.65,1.,height));return smoothstep(.38,.64,n)*shape;}
+      void main(){vec3 ray=orthographic>.5?vec3(0.,-1.,0.):normalize(cloudWorld-cameraPosition);vec3 sky=mix(vec3(.5,.65,.77),vec3(.014,.026,.055),night);if(ray.y>-.002){cloudColor=vec4(sky,1.);return;}vec3 start=cloudWorld;float lengthInCloud=min(37./max(-ray.y,.02),240.);float stride=lengthInCloud/float(steps);float jitter=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453);float transmission=1.;vec3 sum=vec3(0.);for(int i=0;i<24;i++){if(i>=steps||transmission<.025)break;vec3 p=start+ray*(float(i)+jitter)*stride;float d=density(p);if(d>.01){float shadow=density(p+sunDirection*9.);float light=exp(-shadow*2.5);vec3 ambient=mix(vec3(.24,.34,.46),vec3(.025,.045,.085),night);vec3 sun=mix(vec3(.98,.92,.83),vec3(.13,.19,.28),night);vec3 scattering=ambient+sun*(.22+.65*light);float alpha=1.-exp(-d*stride*.16);sum+=transmission*alpha*scattering;transmission*=1.-alpha;}}cloudColor=vec4(sum+transmission*sky,1.);}`});
+  const mesh=new THREE.Mesh(new THREE.PlaneGeometry(1100,1100),material);mesh.rotation.x=-Math.PI/2;mesh.position.y=-18;mesh.renderOrder=-5;mesh.name='Soft volumetric cloud sea';
+  return{mesh,update(t,night,camera){uniforms.time.value=t;uniforms.night.value=night?1:0;uniforms.orthographic.value=camera?.isOrthographicCamera?1:0;},setQuality(q){uniforms.steps.value=q==='performance'?6:q==='ultra'?(mobile?12:24):q==='high'?(mobile?10:18):(mobile?8:14);},dispose(){mesh.geometry.dispose();material.dispose();noise.dispose();}};
+}

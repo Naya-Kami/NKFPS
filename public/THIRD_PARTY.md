@@ -29,7 +29,7 @@ The earlier Venice Sunset environment (Greg Zaal / Poly Haven, CC0) is retained 
 
 CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/
 
-Facility geometry, terrain forms, wet-floor mask, procedural ocean movement, contact-shadow decals, interface, and tactical map are authored for this project. The user's concept images guide the layout and art direction; they are not used as screenshots or flat replacements for the interactive 3D world.
+Facility geometry, terrain forms, wet-floor mask, coastline distance field, procedural ocean movement, cloud density volume, blossom cutouts and instanced foliage, contact-shadow decals, interface, and tactical map are authored for this project. Three.js Sky (MIT, part of the dependency above) supplies the atmospheric sky used for both the Skyport background and image-based lighting. The user's concept images guide the layout and art direction; they are not used as screenshots or flat replacements for the interactive 3D world.
 
 ## Supplied map design references
 

@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import * as THREE from 'three';
-import {MAPS,MAP_IDS,toWorld,toPixel,floorAt,wallSegments} from '../src/maps/atlas.js';
-import {floorGeometry} from '../src/maps/geometry.js';
-import {canOccupy,spawnPosition} from '../src/maps/navigation.js';
-import {buildMap,createMaterials} from '../src/maps/model.js';
-import {SCANNED_SURFACES} from '../src/materials.js';
+import {MAPS,MAP_IDS,toWorld,toPixel,floorAt,wallSegments} from '../src/3dmap/maps/atlas.js';
+import {floorGeometry} from '../src/3dmap/maps/geometry.js';
+import {canOccupy,spawnPosition} from '../src/3dmap/maps/navigation.js';
+import {buildMap,createMaterials} from '../src/3dmap/maps/model.js';
+import {SCANNED_SURFACES} from '../src/3dmap/materials.js';
 
 // Exercise the actual geometry builder without requiring a browser's WebGL context.
 const documentBefore=globalThis.document;
@@ -44,7 +44,7 @@ for(const id of MAP_IDS){
     for(const poi of map.poi){assert.ok(poi.at,poi.id);const [x,,z]=toWorld(map,poi.at);const back=toPixel(map,x,z);assert.ok(Math.hypot(back[0]-poi.at[0],back[1]-poi.at[1])<1e-8);}
   });
   test(`${id}: actual model contains finite 3D geometry and source-aligned collision walls`,()=>{
-    const model=modelFor(map);let meshes=0,triangles=0;model.group.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3;for(const n of o.geometry.attributes.position.array)assert.ok(Number.isFinite(n));}});
+    const model=modelFor(map);let meshes=0,triangles=0;model.group.traverse(o=>{if(o.isMesh){meshes++;triangles+=(o.geometry.index?.count||o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);if(o.isInstancedMesh)for(const n of o.instanceMatrix.array)assert.ok(Number.isFinite(n));for(const n of o.geometry.attributes.position.array)assert.ok(Number.isFinite(n));}});
     assert.ok(meshes>20);assert.ok(triangles>15000&&triangles<250000);assert.equal(model.colliders.filter(c=>c.kind==='wall').length,wallSegments(map).length);assert.ok(existsSync(new URL(`../public${map.reference}`,import.meta.url)));
   });
   test(`${id}: attacker can reach A, B, defender and the central landmark through real door gaps`,()=>{

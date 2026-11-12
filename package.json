@@ -1,13 +1,13 @@
 {
-  "name": "map-atlas",
-  "version": "5.0.0",
+  "name": "nkfps",
+  "version": "6.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "check": "node --check src/main.js && node --check src/world.js && node --check src/materials.js && node --check src/maps/atlas.js && node --check src/maps/model.js && node --check src/maps/environment.js && node --check src/maps/reflections.js && node --check src/maps/navigation.js && node --check src/rendering/quality.js && node --check src/ui/minimap.js && node --check src/maps/physics.js && node --check src/maps/geometry.js",
-    "test": "node tests/world.test.js && node tests/rendering.test.js && node tests/physics.test.js"
+    "check": "node scripts/check.mjs",
+    "test": "node tests/world.test.js && node tests/rendering.test.js && node tests/physics.test.js && node tests/visual-systems.test.js"
   },
   "dependencies": {
     "three": "0.180.0"

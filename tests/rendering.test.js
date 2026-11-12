@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {MAPS,toWorld} from '../src/maps/atlas.js';
-import {headingDegrees,mapViewport,playerTransform,tacticalSVG} from '../src/ui/minimap.js';
-import {qualityProfile,renderPixelRatio,QUALITY_IDS} from '../src/rendering/quality.js';
+import {MAPS,toWorld} from '../src/3dmap/maps/atlas.js';
+import {headingDegrees,mapViewport,playerTransform,tacticalSVG} from '../src/3dmap/ui/minimap.js';
+import {qualityProfile,renderPixelRatio,QUALITY_IDS} from '../src/3dmap/rendering/quality.js';
 
 test('compass and map arrow agree with the FPS camera, including west and wraparound',()=>{
   assert.equal(headingDegrees(0),0);assert.equal(headingDegrees(Math.PI/2),270);assert.equal(headingDegrees(-Math.PI/2),90);assert.equal(headingDegrees(3*Math.PI),180);
