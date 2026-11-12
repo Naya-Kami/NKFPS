@@ -1,0 +1,42 @@
+{
+  "license": "CC0-1.0",
+  "processing": "Poly Haven models optimized by cktang88/3d-fps. Retained embedded 1K WebP PBR maps and authored UVs; all runtime files are local. No Draco or Meshopt decoder required.",
+  "files": {
+    "crate": {
+      "file": "crate.glb",
+      "asset": "wooden_crate_02",
+      "official_source": "https://polyhaven.com/a/wooden_crate_02",
+      "author": "James Ray Cock / Jurita Burger",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "download_url": "https://raw.githubusercontent.com/cktang88/3d-fps/130ac2a5c856401ec36e7d35afcfefe40c5801f4/public/assets/models/props/wooden_crate_02/wooden_crate_02.glb",
+      "bytes": 331724,
+      "triangles": 1500,
+      "sha256": "e18d97c32a228e0605575154b3eb97a395408dde4c3462326c050bff28dac636"
+    },
+    "barrel": {
+      "file": "barrel.glb",
+      "asset": "barrel_03",
+      "official_source": "https://polyhaven.com/a/barrel_03",
+      "author": "Serhii Khromov",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "download_url": "https://raw.githubusercontent.com/cktang88/3d-fps/130ac2a5c856401ec36e7d35afcfefe40c5801f4/public/assets/models/props/barrel_03/barrel_03.glb",
+      "bytes": 296152,
+      "triangles": 1200,
+      "sha256": "c3a9ffefd4e56b952fd5b268b95e842730734d335f99d083c6dca9441d9950dc"
+    },
+    "cabinet": {
+      "file": "cabinet.glb",
+      "asset": "utility_box_01",
+      "official_source": "https://polyhaven.com/a/utility_box_01",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "download_url": "https://raw.githubusercontent.com/cktang88/3d-fps/130ac2a5c856401ec36e7d35afcfefe40c5801f4/public/assets/models/props/utility_box_01/utility_box_01.glb",
+      "bytes": 244540,
+      "triangles": 1500,
+      "sha256": "b61859ebc3b70219217be5d7930642d81e4463e56fe06f1869905aede9907943"
+    }
+  }
+}

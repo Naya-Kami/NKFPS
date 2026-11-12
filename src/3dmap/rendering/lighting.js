@@ -7,13 +7,13 @@ export function lightingPreset(theme,night=false,playing=false){
     background:metro?(night?0x05090f:0x080d10):sky?(night?0x08142b:0x9bb4ce):(night?0x0b1727:0x425b68),
     fog:metro?(night?0x070c13:0x111b21):sky?(night?0x111e35:0xb6cbd9):(night?0x102131:0x557080),
     fogDensity:playing?(metro?.006:.0024):.0004,
-    environmentIntensity:night?(metro?.2:.18):metro?.55:sky?.8:.7,
+    environmentIntensity:night?(metro?.2:.18):metro?.3:sky?.7:.65,
     backgroundIntensity:night?.22:sky?.68:.65,
-    hemi:night?.32:metro?(playing?.8:1.4):sky?1.25:1.1,
+    hemi:night?.16:metro?(playing?.28:.8):sky?.65:.55,
     sun:night?(metro?.08:.12):metro?.35:sky?3:2.3,
     sunColor:night?0x93b6de:sky?0xffeddb:0xffdfba,
     rim:night?.16:metro?.3:.6,
-    exposure:metro?1.2:sky?1:1.05,
+    exposure:metro?.9:sky?1:1.05,
     sunDirection:sky?[-.5,.707,.5]:[-.457,.762,.457]
   };
 }

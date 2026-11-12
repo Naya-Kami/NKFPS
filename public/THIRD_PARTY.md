@@ -29,7 +29,17 @@ The earlier Venice Sunset environment (Greg Zaal / Poly Haven, CC0) is retained 
 
 CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/
 
-Facility geometry, terrain forms, wet-floor mask, coastline distance field, procedural ocean movement, cloud density volume, blossom cutouts and instanced foliage, contact-shadow decals, interface, and tactical map are authored for this project. Three.js Sky (MIT, part of the dependency above) supplies the atmospheric sky used for both the Skyport background and image-based lighting. The user's concept images guide the layout and art direction; they are not used as screenshots or flat replacements for the interactive 3D world.
+## Real-world PBR props (CC0 1.0)
+
+- Wooden Crate 02 — James Ray Cock / Jurita Burger: https://polyhaven.com/a/wooden_crate_02
+- Barrel 03 — Serhii Khromov: https://polyhaven.com/a/barrel_03
+- Utility Box 01 — James Ray Cock: https://polyhaven.com/a/utility_box_01
+
+Poly Haven asset license: https://polyhaven.com/license (CC0). The optimized GLB copies were obtained from the texture/mesh asset mirror at https://github.com/cktang88/3d-fps/tree/130ac2a5c856401ec36e7d35afcfefe40c5801f4/public/assets/models/props . Only these documented assets were reused; no game code was adopted. Exact download URLs, byte sizes, triangle counts, attribution, and SHA-256 hashes are in assets/props/sources.json.
+
+Each GLB contains one static mesh with its authored UVs and embedded 1K WebP color, normal, and metallic/roughness maps. No external image request or Draco/Meshopt decoder is needed. Models are placed at uniform scale, centered on the XZ axes and grounded at Y=0; repeated models share GPU textures and use instancing. The three delivered files total 872,416 bytes.
+
+Facility geometry, train geometry and interiors, equipment cases, consoles, terrain forms, wet-floor mask, coastline distance field, procedural ocean movement, cloud density volume, blossom cutouts and instanced foliage, contact-shadow decals, interface, and tactical map are authored for this project. Three.js Sky (MIT, part of the dependency above) supplies the atmospheric sky used for both the Skyport background and image-based lighting. The user's concept images guide the layout and art direction; they are not used as screenshots or flat replacements for the interactive 3D world.
 
 ## Supplied map design references
 

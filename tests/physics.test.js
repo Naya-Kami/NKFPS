@@ -1,3 +1,4 @@
+import {bundledPropLibrary} from './helpers/propLibrary.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -8,8 +9,9 @@ import {spawnPosition} from '../src/3dmap/maps/navigation.js';
 import {PLAYER,createPhysicsWorld,stepPlayer,bodyIsClear,collisionCandidates,overlapsCollider} from '../src/3dmap/maps/physics.js';
 
 globalThis.document={createElement(){return{width:0,height:0,getContext(){return{fillRect(){},fillText(){},createRadialGradient(){return{addColorStop(){}}}}}}}};
+const propLibrary=await bundledPropLibrary();
 const models=new Map();
-function realWorld(map){if(!models.has(map.id)){const scans=Object.fromEntries(['wall','concrete','steel','rock','metal'].map(n=>[n,{}])),model=buildMap(map,createMaterials(scans,map.theme),{mobile:true});models.set(map.id,{model,world:createPhysicsWorld(map,model.colliders)});}return models.get(map.id);}
+function realWorld(map){if(!models.has(map.id)){const scans=Object.fromEntries(['wall','concrete','steel','rock','metal'].map(n=>[n,{}])),model=buildMap(map,createMaterials(scans,map.theme),{mobile:true,assets:propLibrary});models.set(map.id,{model,world:createPhysicsWorld(map,model.colliders)});}return models.get(map.id);}
 const fixture=(extra={})=>({id:'fixture',origin:[0,0],scale:1,theme:'coastal',outer:rectPoly([-10,-10,20,20]),floorHoles:[],stairs:[],additionalFloors:[],bridges:[],rooms:[],...extra});
 const player=(x=0,feet=0,z=0)=>({position:{x,y:feet+PLAYER.eye,z},verticalVelocity:0,onGround:true});
 function simulate(state,world,seconds,input={}){for(let i=0;i<seconds*60;i++)stepPlayer(state,world,input,1/60);}

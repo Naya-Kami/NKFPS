@@ -1,19 +1,24 @@
+import {bundledPropLibrary} from './helpers/propLibrary.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import * as THREE from 'three';
 import {MAPS,MAP_IDS,toWorld,toPixel,floorAt,wallSegments} from '../src/3dmap/maps/atlas.js';
 import {floorGeometry} from '../src/3dmap/maps/geometry.js';
 import {canOccupy,spawnPosition} from '../src/3dmap/maps/navigation.js';
 import {buildMap,createMaterials} from '../src/3dmap/maps/model.js';
 import {SCANNED_SURFACES} from '../src/3dmap/materials.js';
+import {PROP_ASSETS,crateArrangement} from '../src/3dmap/maps/propAssets.js';
+import {buildMetroTrain,metroRailPositions} from '../src/3dmap/maps/train.js';
 
 // Exercise the actual geometry builder without requiring a browser's WebGL context.
 const documentBefore=globalThis.document;
 globalThis.document={createElement(){return{width:0,height:0,getContext(){return{fillRect(){},fillText(){},createRadialGradient(){return{addColorStop(){}}}}}}}};
 const scans=Object.fromEntries(SCANNED_SURFACES.map(name=>[name,{map:new THREE.Texture(),normalMap:new THREE.Texture(),roughnessMap:new THREE.Texture()}]));
+const propLibrary=await bundledPropLibrary();
 const models=new Map();
-const modelFor=map=>{if(!models.has(map.id))models.set(map.id,buildMap(map,createMaterials(scans,map.theme),{mobile:true}));return models.get(map.id);};
+const modelFor=map=>{if(!models.has(map.id))models.set(map.id,buildMap(map,createMaterials(scans,map.theme),{mobile:true,assets:propLibrary}));return models.get(map.id);};
 const area=poly=>Math.abs(poly.reduce((s,a,i)=>{const b=poly[(i+1)%poly.length];return s+a[0]*b[1]-b[0]*a[1];},0))*.005;
 
 test('three separate references retain their characteristic level topology',()=>{
@@ -61,4 +66,49 @@ for(const id of MAP_IDS){
 test('all photographic runtime maps have bundled WebP content and recorded provenance',()=>{
   const sources=JSON.parse(readFileSync(new URL('../public/assets/pbr/sources.json',import.meta.url)));
   for(const name of SCANNED_SURFACES)for(const channel of['color','normal','roughness']){const file=`${name}-${channel}.webp`,data=readFileSync(new URL(`../public/assets/pbr/${file}`,import.meta.url));assert.equal(data.toString('ascii',0,4),'RIFF');assert.equal(data.toString('ascii',8,12),'WEBP');assert.ok(sources.files[file]?.source_url);}
+});
+
+test('bundled PBR props have verified provenance and no external runtime dependencies',()=>{
+  const manifest=JSON.parse(readFileSync(new URL('../public/assets/props/sources.json',import.meta.url)));let bytes=0;
+  for(const id of PROP_ASSETS){
+    const record=manifest.files[id],data=readFileSync(new URL(`../public/assets/props/${record.file}`,import.meta.url));bytes+=data.length;
+    assert.equal(createHash('sha256').update(data).digest('hex'),record.sha256);assert.equal(record.license,'CC0-1.0');assert.ok(record.official_source.startsWith('https://polyhaven.com/a/'));
+    assert.equal(data.toString('ascii',0,4),'glTF');assert.equal(data.readUInt32LE(4),2);assert.equal(data.readUInt32LE(8),data.length);
+    const json=JSON.parse(data.toString('utf8',20,20+data.readUInt32LE(12)));assert.ok(json.buffers.every(b=>!b.uri));assert.equal(json.images.length,3);
+    for(const im of json.images){assert.equal(im.mimeType,'image/webp');assert.equal(im.uri,undefined);const view=json.bufferViews[im.bufferView],offset=28+data.readUInt32LE(12)+(view.byteOffset||0);assert.equal(data.toString('ascii',offset,offset+4),'RIFF');assert.equal(data.toString('ascii',offset+8,offset+12),'WEBP');}
+    const asset=propLibrary.get(id);assert.ok(asset.material.map&&asset.material.normalMap&&asset.material.roughnessMap&&asset.material.metalnessMap);assert.ok(asset.geometry.attributes.uv);assert.ok(Math.abs(asset.geometry.boundingBox.min.y)<1e-6);
+  }
+  assert.ok(bytes<900000,'mobile prop payload must stay below 900 KB');
+});
+test('real crate stacks preserve proportions, fit their allocated space and have no vertical gaps',()=>{
+  const size=propLibrary.get('crate').size,allocations=[[1.6,1.5,1.5],[.8,1.1,.9],[3.2,2.5,2.8]];
+  for(const map of Object.values(MAPS))if(Array.isArray(map.props))for(const o of map.props.filter(o=>o.kind==='crate'||o.kind==='crate-stack'))if(o.rect){const w=o.rect[2]*.1,d=o.rect[3]*.1;allocations.push([w,o.kind==='crate-stack'?2.5:Math.min(2,(w+d)*.4),d]);}
+  for(const[w,h,d]of allocations){
+    const items=crateArrangement(size,w,h,d);assert.ok(items.length);
+    const bounds=items.map(item=>{const turned=!!item.angle;return{...item,w:(turned?size.z:size.x)*item.scale,d:(turned?size.x:size.z)*item.scale,top:item.y+size.y*item.scale};});
+    for(const item of bounds){assert.ok(item.scale>0);assert.ok(Math.abs(item.x)+item.w/2<=w/2+1e-6);assert.ok(Math.abs(item.z)+item.d/2<=d/2+1e-6);assert.ok(item.top<=h+1e-6);
+      if(item.y>1e-6)assert.ok(bounds.some(other=>Math.abs(other.top-item.y)<1e-6&&Math.abs(item.x-other.x)<(item.w+other.w)/2&&Math.abs(item.z-other.z)<(item.d+other.d)/2),'every upper crate needs a touching support');
+    }
+  }
+});
+test('instanced real props retain individual collision shapes at their actual size and floor height',()=>{
+  for(const map of Object.values(MAPS)){
+    const model=modelFor(map);model.group.traverse(mesh=>{if(!mesh.name.startsWith('PBR prop / '))return;const id=mesh.name.split(' / ')[1],template=propLibrary.get(id),matrix=new THREE.Matrix4(),position=new THREE.Vector3(),rotation=new THREE.Quaternion(),scale=new THREE.Vector3();
+      for(let i=0;i<mesh.count;i++){mesh.getMatrixAt(i,matrix);matrix.decompose(position,rotation,scale);assert.ok(Math.abs(scale.x-scale.y)<1e-6&&Math.abs(scale.y-scale.z)<1e-6);
+        const c=model.colliders.find(c=>Math.hypot(c.x-position.x,c.z-position.z)<1e-4&&Math.abs(c.bottom-position.y)<1e-4&&Math.abs(c.top-(position.y+template.size.y*scale.y))<1e-4);assert.ok(c,`${map.id}/${id}/${i}`);
+        if(id==='barrel')assert.ok(Math.abs(c.radius-Math.max(template.size.x,template.size.z)*scale.x/2)<1e-4);else{assert.ok(Math.abs(c.w-template.size.x*scale.x)<1e-4);assert.ok(Math.abs(c.d-template.size.z*scale.z)<1e-4);}
+      }
+    });
+  }
+});
+test('metro wheels touch their rails underneath each body and the curved roof clears the bridge',()=>{
+  const map=MAPS.terminal,materials=createMaterials(scans,map.theme);
+  for(const train of map.trains){
+    const wheels=[],colliders=[],roofs=[],p=(at,y=0)=>toWorld(map,at,y);
+    buildMetroTrain(map,train,materials,{box(){},beam(){},text(){},p,collider:c=>colliders.push(c),geo(g,mat,at){g.computeBoundingBox();if(g.type==='CylinderGeometry'&&g.parameters.radiusTop===.24)wheels.push({at,bounds:g.boundingBox.clone()});if(g.type==='ExtrudeGeometry')roofs.push(g.boundingBox.clone());g.dispose();}});
+    assert.equal(wheels.length,train.cars*4);assert.equal(roofs.length,train.cars);const track=map.tracks.find(t=>train.rect[0]>t.rect[0]&&train.rect[0]<t.rect[0]+t.rect[2]),railX=metroRailPositions(track).map(x=>p([x,0])[0]);assert.ok(Math.abs(railX[1]-railX[0]-1.435)<1e-6);
+    for(const wheel of wheels){assert.ok(railX.some(x=>Math.abs(x-wheel.at[0])<1e-6));assert.ok(Math.abs(wheel.at[1]+wheel.bounds.min.y-(-.85))<1e-6);assert.ok(colliders.some(c=>Math.abs(wheel.at[0]-c.x)+.08<c.w/2&&Math.abs(wheel.at[2]-c.z)<c.d/2));}
+    for(const roof of roofs)assert.ok(roof.max.y<map.bridges[0].floorY-.25);for(const c of colliders)assert.ok(c.bottom>-.37,'body must not enclose the visible wheels');
+  }
+  Object.values(materials).forEach(m=>m.dispose());
 });
