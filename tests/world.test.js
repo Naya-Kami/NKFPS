@@ -1,4 +1,5 @@
 import {bundledPropLibrary} from './helpers/propLibrary.js';
+import {createCanvasDocument} from './helpers/canvasDocument.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -14,7 +15,7 @@ import {buildMetroTrain,metroRailPositions} from '../src/3dmap/maps/train.js';
 
 // Exercise the actual geometry builder without requiring a browser's WebGL context.
 const documentBefore=globalThis.document;
-globalThis.document={createElement(){return{width:0,height:0,getContext(){return{fillRect(){},fillText(){},createRadialGradient(){return{addColorStop(){}}}}}}}};
+globalThis.document=createCanvasDocument();
 const scans=Object.fromEntries(SCANNED_SURFACES.map(name=>[name,{map:new THREE.Texture(),normalMap:new THREE.Texture(),roughnessMap:new THREE.Texture()}]));
 const propLibrary=await bundledPropLibrary();
 const models=new Map();

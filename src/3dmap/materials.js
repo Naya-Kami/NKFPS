@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {surfaceContextGLSL, wetSurfaceGLSL} from './rendering/surfaceContext.js';
 
 export const SCANNED_SURFACES=['wall','concrete','metal','rock','asphalt','aggregate','steel'];
 const ACTIVE_SURFACES=['wall','concrete','metal','rock','steel'];
@@ -74,4 +75,38 @@ export function worldMapped(material,scale=.4,weathering=.2,saturation=1,tileSiz
   };
   material.customProgramCacheKey=()=>`scanned-triplanar-v4:${scale}:${weathering}:${saturation}:${tileSize}`;
   return material;
+}
+
+export function applySurfaceContext(material, context, {wet = false, enclosed = false} = {}) {
+  const originalCompile = material.onBeforeCompile;
+  const cacheKey = material.customProgramCacheKey();
+  material.customProgramCacheKey = () => `${cacheKey}:surface-context:${wet}:${enclosed}`;
+  material.onBeforeCompile = shader => {
+    originalCompile(shader);
+    Object.assign(shader.uniforms, context.uniforms);
+    shader.fragmentShader = `${surfaceContextGLSL}${wet ? wetSurfaceGLSL : ''}${shader.fragmentShader}`;
+    shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `
+      #include <color_fragment>
+      vec4 localSurface = readSurfaceContext(vScanPosition.xz);
+      float localFloor = surfaceHeight.x + localSurface.a * surfaceHeight.y;
+      float localRoof = surfaceHeight.x + localSurface.b * surfaceHeight.y;
+      float nearFloor = 1.0 - smoothstep(0.05, 1.25, abs(vScanPosition.y - localFloor));
+      float wallContact = (1.0 - localSurface.r) * nearFloor;
+      float underRoof = (1.0 - smoothstep(0.1, 0.9, localSurface.g)) *
+        smoothstep(0.1, 1.4, localRoof - vScanPosition.y);
+      ${wet ? `float localWater = nearFloor * surfaceWater(vScanPosition.xz, localSurface);
+        diffuseColor.rgb *= 1.0 - 0.28 * localWater;` : ''}
+      diffuseColor.rgb *= 1.0 - 0.11 * wallContact;
+    `);
+    shader.fragmentShader = shader.fragmentShader.replace('#include <metalnessmap_fragment>', `
+      ${wet ? 'roughnessFactor = mix(roughnessFactor, 0.26, localWater * 0.75);' : ''}
+      #include <metalnessmap_fragment>
+    `);
+    shader.fragmentShader = shader.fragmentShader.replace('#include <aomap_fragment>', `
+      #include <aomap_fragment>
+      float localOcclusion = (1.0 - 0.27 * wallContact) * (1.0 - ${enclosed ? '0.09' : '0.24'} * underRoof);
+      reflectedLight.indirectDiffuse *= localOcclusion;
+      reflectedLight.indirectSpecular *= localOcclusion;
+    `);
+  };
 }

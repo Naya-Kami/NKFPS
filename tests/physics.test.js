@@ -1,4 +1,5 @@
 import {bundledPropLibrary} from './helpers/propLibrary.js';
+import {createCanvasDocument} from './helpers/canvasDocument.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
@@ -8,7 +9,7 @@ import {buildMap,createMaterials} from '../src/3dmap/maps/model.js';
 import {spawnPosition} from '../src/3dmap/maps/navigation.js';
 import {PLAYER,createPhysicsWorld,stepPlayer,bodyIsClear,collisionCandidates,overlapsCollider} from '../src/3dmap/maps/physics.js';
 
-globalThis.document={createElement(){return{width:0,height:0,getContext(){return{fillRect(){},fillText(){},createRadialGradient(){return{addColorStop(){}}}}}}}};
+globalThis.document=createCanvasDocument();
 const propLibrary=await bundledPropLibrary();
 const models=new Map();
 function realWorld(map){if(!models.has(map.id)){const scans=Object.fromEntries(['wall','concrete','steel','rock','metal'].map(n=>[n,{}])),model=buildMap(map,createMaterials(scans,map.theme),{mobile:true,assets:propLibrary});models.set(map.id,{model,world:createPhysicsWorld(map,model.colliders)});}return models.get(map.id);}

@@ -7,6 +7,9 @@ import {worldMapped} from '../materials.js';
 import {createBlossomCanopy} from './vegetation.js';
 import {createPropBatch,crateArrangement} from './propAssets.js';
 import {buildMetroTrain,metroRailPositions} from './train.js';
+import {buildSkyportDetails} from './skyportDetails.js';
+import {addTerminalDetails} from './terminalDetails.js';
+import {addBlacksiteDetails} from './blacksiteDetails.js';
 
 export function createMaterials(scans,theme){
   const material=(name,color,roughness=.8,metalness=0,scale=.5,weather=.25)=>{const mat=worldMapped(new THREE.MeshPhysicalMaterial({...scans[name],color,roughness,metalness,normalScale:new THREE.Vector2(.48,.48)}),scale,weather);mat.userData.surface=name;return mat;};
@@ -214,6 +217,7 @@ export function buildMap(map,mats,{mobile=false,assets=null}={}){
   }
   if(map.id==='blacksite'){
     map.props.forEach(prop);
+    addBlacksiteDetails(map,mats,{box,beam,geo,p,text,walls,ownedMaterials});
     const core=map.core,at=core.center;const cp=p(at);colliders.push({kind:'circle',x:cp[0],z:cp[2],radius:3.1,bottom:0,top:8.4});
     // Core gallery slab, openings and handrails are shared with navigation.
     cyl(at,4.1,3.1,7.7,mats.glass,48);cyl(at,4.1,.9,7.5,mats.cool,32);
@@ -244,7 +248,7 @@ export function buildMap(map,mats,{mobile=false,assets=null}={}){
     for(const yy of[.28,.55]){const ellipse=new THREE.EllipseCurve(0,0,dome.radiusX*.1,dome.radiusZ*.1);const points=ellipse.getPoints(64).map(q=>new THREE.Vector3(q.x,0,q.y));const g=new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points,true),64,.08,6,true);geo(g,mats.metal,p(dome.floorCenter,yy));}
     for(const height of[1.8,3.7,5.6,7.1]){const ratio=Math.sqrt(Math.max(0,1-((height-.25)/dome.height)**2)),ellipse=new THREE.EllipseCurve(0,0,dome.radiusX*.1*ratio,dome.radiusZ*.1*ratio),points=ellipse.getPoints(80).map(q=>new THREE.Vector3(q.x,0,q.y));geo(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points,true),80,.038,5,true),mats.metal,p(dome.floorCenter,height));}
     for(let i=0;i<16;i++){const a=i/16*Math.PI*2,at=[dome.floorCenter[0]+Math.cos(a)*dome.radiusX,dome.floorCenter[1]+Math.sin(a)*dome.radiusZ];box(at,.28,.42,.12,.42,mats.metal,0,false,'base',.025);}
-    text('DEPARTURES  /  NEXUS',[props.flightBoard.center[0],props.flightBoard.center[1]+2],4.9,10,2.7,'#a7dfed','#142c41');box(props.flightBoard.center,4.9,10.5,3,.35,mats.dark);
+    buildSkyportDetails(map,mats,{geo,box,beam,p,withFloor,ownedMaterials,mobile});
     jet([35,507],8.4,1.52,false,0);jet([1230,430],8.8,-1.8,false,0);jet([191,801],3.9,1.55,true,-2.5);jet([1073,801],3.9,1.55,true,-2.5);
     // Dense underside braces distinguish a suspended platform from a ground slab.
     for(let i=0;i<map.outer.length;i+=3){const at=map.outer[i];box(at,-3,.3,5,.3,mats.metal);box([at[0],at[1]],-5,.75,.3,.75,mats.yellow);}
@@ -253,6 +257,7 @@ export function buildMap(map,mats,{mobile=false,assets=null}={}){
     for(const o of map.props)prop(o);
     for(const t of map.tracks){const [x,z,w,d]=t.rect;for(let py=z;py<z+d;py+=12)box([x+w/2,py],-1.08,w*.1-.3,.14,.24,mats.metal);for(const railX of metroRailPositions(t)){const at=[railX,z+d/2];box(at,-.995,.13,.04,d*.1,mats.trainMetal);box(at,-.9325,.018,.085,d*.1,mats.trainMetal);box(at,-.87,.065,.04,d*.1,mats.trainMetal);} }
     for(const tr of map.trains)buildMetroTrain(map,tr,mats,{box,geo,p,beam,text,collider:c=>colliders.push(c)});
+    addTerminalDetails(map,mats,{box,geo,p,beam,ownedMaterials},{mobile});
     // Overhead structure remains in first-person and is cut away in plan mode.
     ceiling(map.outer,6.5);
     for(let py=320;py<840;py+=55){for(const px of[510,750]){box([px,py],3,.6,6,.6,mats.wall,0,true);box([px,py],5.8,5.5,.22,.25,mats.metal);box([px,py],5.6,3.7,.08,.18,mats.lampWhite);point([px,py],4.7,0xffefda,180,14);}pxBeam([495,py],[776,py],6.1,.1,mats.metal,'roof');}

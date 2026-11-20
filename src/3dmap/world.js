@@ -10,7 +10,8 @@ import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createSkyLighting,lightingPreset} from './rendering/lighting.js';
 import {createLightBudget} from './rendering/lightBudget.js';
 import {qualityProfile,renderPixelRatio,QUALITY_IDS} from './rendering/quality.js';
-import {loadScannedSurfaces} from './materials.js';
+import {applySurfaceContext,loadScannedSurfaces} from './materials.js';
+import {createSurfaceContext} from './rendering/surfaceContext.js';
 import {getMap,toWorld, floorAt,segmentPointDistance,roomAt} from './maps/atlas.js';
 import {buildMap,createMaterials} from './maps/model.js';
 import {loadPropAssets} from './maps/propAssets.js';
@@ -40,7 +41,7 @@ export async function createWorld(container,onProgress=()=>{}){
   const bloom=new UnrealBloomPass(new THREE.Vector2(800,600),.14,.45,1.3);composer.addPass(bloom);const smaa=new SMAAPass();composer.addPass(smaa);composer.addPass(new OutputPass());
   const state={mode:'overview',view:'plan',mapId:'blacksite',paused:false,position:new V(),yaw:0,pitch:0,sprint:100,verticalVelocity:0,onGround:true,moving:false,quality:mobile?'balanced':'high',weather:true,night:false,flashlight:false,viewMove:new THREE.Vector2(),orbitYaw:0,orbitPitch:1.1,zoom:1,labels:true,routes:true,elapsed:0};
   const keys={},highScans={},highLoads=new Map(),shadowFocus=new V(Infinity,0,Infinity);let profile=qualityProfile(state.quality,mobile),surfaceEpoch=0;
-  let map=getMap('blacksite'),model,environment,reflection,materials,physicsWorld,lightBudget,disposed=false,latestFps=0,frames=0,frameTime=0,lastLight=-1,renderSize={width:800,height:600};
+  let map=getMap('blacksite'),model,environment,reflection,surfaceContext,materials,physicsWorld,lightBudget,disposed=false,latestFps=0,frames=0,frameTime=0,lastLight=-1,renderSize={width:800,height:600};
   function refreshCamera(){camera=state.mode==='playing'||state.view==='orbit'?perspective:planCamera;renderPass.camera=camera;ssao.camera=camera;const flag=camera.isPerspectiveCamera?1:0;
     for(const mat of[ssao.ssaoMaterial,ssao.depthRenderMaterial]){if(mat.defines.PERSPECTIVE_CAMERA!==flag){mat.defines.PERSPECTIVE_CAMERA=flag;mat.needsUpdate=true;}mat.uniforms.cameraNear.value=camera.near;mat.uniforms.cameraFar.value=camera.far;}
     ssao.ssaoMaterial.uniforms.cameraProjectionMatrix.value.copy(camera.projectionMatrix);ssao.ssaoMaterial.uniforms.cameraInverseProjectionMatrix.value.copy(camera.projectionMatrixInverse);
@@ -56,9 +57,16 @@ export async function createWorld(container,onProgress=()=>{}){
     scene.fog=new THREE.FogExp2(p.fog,p.fogDensity);hemi.intensity=p.hemi;sun.intensity=p.sun;sun.color.setHex(p.sunColor);rim.intensity=p.rim;renderer.toneMappingExposure=p.exposure;updateShadow(true);
   }
   async function setMap(id){
-    const next=getMap(id);if(model){scene.remove(model.group,environment.group,reflection.mesh);lightBudget?.dispose();model.dispose();environment.dispose();reflection.dispose();for(const m of Object.values(materials))m.dispose();}
+    const next=getMap(id);if(model){scene.remove(model.group,environment.group,reflection.mesh);lightBudget?.dispose();model.dispose();environment.dispose();reflection.dispose();surfaceContext.dispose();for(const m of Object.values(materials))m.dispose();}
     map=next;if(map.theme==='sky'&&!skyLighting){onProgress('Preparing atmospheric sky and reflections');skyLighting=createSkyLighting(renderer,mobile);}state.mapId=map.id;state.mode='overview';state.view='plan';state.zoom=1;state.orbitYaw=0;state.paused=false;state.viewMove.set(0,0);Object.keys(keys).forEach(k=>keys[k]=false);
-    materials=createMaterials(scans,map.theme);model=buildMap(map,materials,{mobile,assets:propLibrary});environment=buildEnvironment(map,materials,mobile,{skyHDR:hdr});reflection=mapReflections(map,scans.concrete.normalMap,mobile);scene.add(environment.group,model.group,reflection.mesh);
+    surfaceContext=createSurfaceContext(map,mobile);
+    materials=createMaterials(scans,map.theme);
+    applySurfaceContext(materials.wall,surfaceContext,{enclosed:map.theme==='metro'});
+    applySurfaceContext(materials.floor,surfaceContext,{wet:map.theme==='coastal',enclosed:map.theme==='metro'});
+    model=buildMap(map,materials,{mobile,assets:propLibrary});
+    environment=buildEnvironment(map,materials,mobile,{skyHDR:hdr,surfaceContext});
+    reflection=mapReflections(map,scans.concrete.normalMap,mobile,surfaceContext);
+    scene.add(environment.group,model.group,reflection.mesh);
     lightBudget=createLightBudget(scene,model.lights,map,model.colliders.filter(c=>c.kind==='wall'));physicsWorld=createPhysicsWorld(map,model.colliders);state.position.set(...spawnPosition(map,'attacker',model.colliders));state.onGround=true;state.verticalVelocity=0;state.jumpHeld=false;state.jumpQueued=false;state.safePosition={x:state.position.x,y:state.position.y,z:state.position.z};applyLighting();setQuality(state.quality);resize();renderer.shadowMap.needsUpdate=true;lastLight=-1;return map;
   }
   async function upgradeSurfaces(){const epoch=++surfaceEpoch;state.textureStatus=profile.hi.length?'loading':'ready';try{await Promise.all(profile.hi.map(name=>{if(!highLoads.has(name))highLoads.set(name,loadScannedSurfaces(renderer,{names:[name],resolution:'hi'}).then(sets=>{highScans[name]=sets[name];}).catch(e=>{highLoads.delete(name);throw e;}));return highLoads.get(name);}));if(epoch!==surfaceEpoch)return;for(const mat of Object.values(materials||{})){const name=mat.userData.surface;if(!name)continue;const set=profile.hi.includes(name)?highScans[name]:scans[name];Object.assign(mat,set);mat.needsUpdate=true;}reflection?.setNormalMap((profile.hi.includes('concrete')?highScans.concrete:scans.concrete).normalMap);state.textureStatus='ready';}catch(e){if(epoch===surfaceEpoch)state.textureStatus='fallback';console.warn('High-resolution surfaces unavailable; bundled base maps remain active',e);}}
@@ -72,9 +80,12 @@ export async function createWorld(container,onProgress=()=>{}){
   function look(dx,dy,sensitivity=1){state.yaw-=dx*.002*sensitivity;state.pitch=clamp(state.pitch-dy*.002*sensitivity,-1.35,1.35);}
   function blocked(x,z){return !canOccupy(map,model.colliders,x,z,state.position.y-1.7);}
   function setNight(value){state.night=value;applyLighting();}function setFlashlight(value){state.flashlight=value;flashlight.intensity=value?36:0;flashlight.castShadow=value&&['high','ultra'].includes(state.quality);renderer.shadowMap.needsUpdate=true;}
-  const clock=new THREE.Clock();let previous=0;
+  const clock=new THREE.Clock();
   function update(){if(disposed)return;const raw=clock.getDelta(),dt=Math.min(raw,.04),t=clock.elapsedTime;state.elapsed=t;renderer.info.reset();
-    environment.update(t,state.weather,state.night,camera);reflection.update(t,state.weather);model.routes.visible=state.routes&&state.mode!=='playing';reflection.mesh.visible=state.quality!=='performance'&&(state.mode==='playing'||state.view==='orbit');
+    surfaceContext.update(state.weather,dt);
+    environment.update(t,state.weather,state.night,camera);
+    reflection.update(t,state.mode==='playing'||state.view==='orbit');
+    model.routes.visible=state.routes&&state.mode!=='playing';
     if(state.mode!=='playing'){
       const [l,top,r,bottom]=map.frame,center=toWorld(map,[(l+r)/2,(top+bottom)/2]);
       planCamera.position.set(center[0],180,center[2]+.001);planCamera.up.set(0,0,-1);planCamera.lookAt(center[0],0,center[2]);
@@ -95,7 +106,7 @@ export async function createWorld(container,onProgress=()=>{}){
     composer.render();frames++;if(t-frameTime>1){latestFps=Math.round(frames/(t-frameTime));frames=0;frameTime=t;}requestAnimationFrame(update);
   }
   onProgress('Building the traced Blacksite Echo layout');await setMap('blacksite');resize();requestAnimationFrame(update);
-  function dispose(){if(disposed)return;disposed=true;surfaceEpoch++;lightBudget?.dispose();model?.dispose();environment?.dispose();reflection?.dispose();Object.values(materials||{}).forEach(m=>m.dispose());for(const set of new Set([...Object.values(scans),...Object.values(highScans)]))Object.values(set).forEach(t=>t.dispose());for(const pass of composer.passes)pass.dispose?.();composer.dispose();envTarget?.dispose();indoorTarget.dispose();hdr?.dispose();propLibrary?.dispose();skyLighting?.dispose();sun.shadow.dispose();flashlight.shadow.dispose();renderer.dispose();renderer.domElement.remove();}
+  function dispose(){if(disposed)return;disposed=true;surfaceEpoch++;lightBudget?.dispose();model?.dispose();environment?.dispose();reflection?.dispose();surfaceContext?.dispose();Object.values(materials||{}).forEach(m=>m.dispose());for(const set of new Set([...Object.values(scans),...Object.values(highScans)]))Object.values(set).forEach(t=>t.dispose());for(const pass of composer.passes)pass.dispose?.();composer.dispose();envTarget?.dispose();indoorTarget.dispose();hdr?.dispose();propLibrary?.dispose();skyLighting?.dispose();sun.shadow.dispose();flashlight.shadow.dispose();renderer.dispose();renderer.domElement.remove();}
   return{scene,renderer,state,keys,get camera(){return camera;},get map(){return map;},get model(){return model;},setMap,setView,enter,home,teleport:enter,orbit,look,resize,setQuality,setNight,setFlashlight,blocked,dispose,
     get fps(){return latestFps;},get zone(){return roomAt(map,state.position.x,state.position.z,state.position.y-PLAYER.eye);},get stats(){return{drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,walls:wallSegmentsCount(),rooms:map.rooms.length};}};
   function wallSegmentsCount(){return model.colliders.filter(c=>c.kind==='wall').length;}
