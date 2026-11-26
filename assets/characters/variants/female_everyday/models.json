@@ -1,0 +1,55 @@
+{
+  "revision": "everyday-v1",
+  "format": "GLB 2.0",
+  "models": [
+    {
+      "character": "レイナ・クロス",
+      "outfit": "黒とボルドーのラップドレス",
+      "file": "reina_cross.glb",
+      "bytes": 55571980,
+      "sha256": "ddc850c0d3f53d0bd009bfc9dbba45087bada225ea28759b7b11ac0fc53d18c1"
+    },
+    {
+      "character": "ミサキ・ヴェイル",
+      "outfit": "チャコールのリブニットとプリーツスカート",
+      "file": "misaki_veil.glb",
+      "bytes": 55864988,
+      "sha256": "b933aaf55d08337964af981777c3f391f9da7502a94a33776aa26feae073f677"
+    },
+    {
+      "character": "セリナ・ヴォルテージ",
+      "outfit": "コバルトのクロップトップと折り返しデニム",
+      "file": "selina_voltage.glb",
+      "bytes": 57991000,
+      "sha256": "2448e2e6fe2e1262adb06cdfb0438e0d5e784a8e3a132c9ea36cf140c974ee97"
+    },
+    {
+      "character": "アヤメ・ブレイズ",
+      "outfit": "錆赤のリブニットとチャコールのテーパードパンツ",
+      "file": "ayame_blaze.glb",
+      "bytes": 53481852,
+      "sha256": "eefaf1c42c1aec8ea67382f1c9f5058e0421debedc1203760872394ebe586de9"
+    },
+    {
+      "character": "ノエル・スカイ",
+      "outfit": "クリームとネイビーのテニスドレス",
+      "file": "noel_sky.glb",
+      "bytes": 59303000,
+      "sha256": "cc772a7cfd76f038cbf7a8e4636bc3dffc36cb27451b76224dbce88c3404a26b"
+    },
+    {
+      "character": "カレン・ルクス",
+      "outfit": "アイボリーのスクエアネック・ミディドレス",
+      "file": "karen_lux.glb",
+      "bytes": 56539948,
+      "sha256": "2205a839fb4157e942f33dd1308dcf76f0418085c10026306f632776561e3802"
+    },
+    {
+      "character": "ユリナ・ミラージュ",
+      "outfit": "プラム色のワンショルダー・サテンドレス",
+      "file": "yurina_mirage.glb",
+      "bytes": 53943472,
+      "sha256": "7806936a2a72efbecbe049e92551261ad3f52737cc24f771f08ea9a469b115f3"
+    }
+  ]
+}

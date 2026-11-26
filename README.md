@@ -23,6 +23,8 @@ iPadでは上のURLをSafariで開いてください。現在の機能はマッ�
 
 現代衣装版は比較用の試作です。次は、戦場での動きやすさと衣装の可愛さ・色気を両立させ、顎の形と顔・体型の組み合わせを見直します。[女性7人のキャラクターデザイン再レビュー](docs/character-art-review.md)
 
+[現代衣装版の3Dモデル7体（GLB）](assets/characters/variants/female_everyday/README.md)
+
 ## 起動とビルド
 
 Node.js **22.12以上**を使用してください。Node.js 24で検証しています。
