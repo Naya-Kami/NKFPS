@@ -42,13 +42,5 @@ jobs:
       url: ${{ steps.publish.outputs.page_url }}
     steps:
       - uses: actions/configure-pages@v5
-      - name: Migrate branch publishing to GitHub Actions
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          pages_endpoint="repos/$GITHUB_REPOSITORY/pages"
-          if [ "$(gh api "$pages_endpoint" --jq .build_type)" = legacy ]; then
-            gh api --method PUT "$pages_endpoint" -f build_type=workflow
-          fi
       - id: publish
         uses: actions/deploy-pages@v4
