@@ -1,6 +1,7 @@
 import blacksite from './data/blacksite.json' with { type:'json' };
 import skyport from './data/skyport.json' with { type:'json' };
 import terminal from './data/terminal.json' with { type:'json' };
+import {publicAsset} from '../publicAsset.js';
 
 export const MAP_IDS=['blacksite','skyport','terminal'];
 const rectPoly=([x,z,w,d])=>[[x,z],[x+w,z],[x+w,z+d],[x,z+d]];
@@ -8,7 +9,7 @@ const mean=poly=>poly.reduce((v,p)=>[v[0]+p[0]/poly.length,v[1]+p[1]/poly.length
 function normalize(raw){
   const id=raw.id,origin=raw.origin||(id==='skyport'?[630,470]:[500,620]);
   const rooms=raw.rooms.map(r=>({...r,center:r.center||raw.anchors?.[r.id]||mean(r.polygon),floorY:r.floorY||0,openEdges:!!r.openEdges}));
-  const map={...raw,id,title:raw.title||raw.name,origin,scale:.1,reference:`/references/${id}.jpg`,rooms,additionalFloors:raw.additionalFloors||[],bridges:raw.bridges||[],stairs:raw.stairs||[],doors:raw.doors||[],anchors:{...(raw.anchors||{})}};
+  const map={...raw,id,title:raw.title||raw.name,origin,scale:.1,reference:publicAsset(`references/${id}.jpg`),rooms,additionalFloors:raw.additionalFloors||[],bridges:raw.bridges||[],stairs:raw.stairs||[],doors:raw.doors||[],anchors:{...(raw.anchors||{})}};
   map.theme=id==='blacksite'?'coastal':id==='skyport'?'sky':'metro';
   map.subtitle={blacksite:'COASTAL RESEARCH FACILITY / CONTAINMENT LAB',skyport:'FLOATING AIRPORT TERMINAL / DOCKING PLATFORMS',terminal:'UNDERGROUND METRO / MAINTENANCE NETWORK'}[id];
   map.accent={blacksite:'#e3aa69',skyport:'#80ccf2',terminal:'#d48167'}[id];

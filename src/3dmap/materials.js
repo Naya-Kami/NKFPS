@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {surfaceContextGLSL, wetSurfaceGLSL} from './rendering/surfaceContext.js';
+import {publicAsset} from './publicAsset.js';
 
 export const SCANNED_SURFACES=['wall','concrete','metal','rock','asphalt','aggregate','steel'];
 const ACTIVE_SURFACES=['wall','concrete','metal','rock','steel'];
@@ -11,7 +12,7 @@ export async function loadScannedSurfaces(renderer,{names=ACTIVE_SURFACES,resolu
   const anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());
   const sets=await Promise.all(names.map(async name=>{
     const maps=await Promise.all(['color','normal','roughness'].map(async channel=>{
-      const t=await loader.loadAsync(`/assets/pbr/${resolution==='hi'?'hi/':''}${name}-${channel}.webp`);
+      const t=await loader.loadAsync(publicAsset(`assets/pbr/${resolution==='hi'?'hi/':''}${name}-${channel}.webp`));
       t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=anisotropy;
       if(channel==='color')t.colorSpace=THREE.SRGBColorSpace;
       return t;

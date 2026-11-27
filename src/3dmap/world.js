@@ -19,6 +19,7 @@ import {buildEnvironment} from './maps/environment.js';
 import {mapReflections} from './maps/reflections.js';
 import {canOccupy,spawnPosition} from './maps/navigation.js';
 import {createPhysicsWorld,stepPlayer,PLAYER} from './maps/physics.js';
+import {publicAsset} from './publicAsset.js';
 
 const V=THREE.Vector3,clamp=THREE.MathUtils.clamp;
 export async function createWorld(container,onProgress=()=>{}){
@@ -31,7 +32,7 @@ export async function createWorld(container,onProgress=()=>{}){
   const sun=new THREE.DirectionalLight(0xffe0bd,2.5);sun.position.set(-60,100,60);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-95;sun.shadow.camera.right=95;sun.shadow.camera.top=100;sun.shadow.camera.bottom=-100;sun.shadow.camera.far=260;sun.shadow.normalBias=.045;sun.shadow.bias=-.0001;sun.shadow.camera.updateProjectionMatrix();scene.add(sun,sun.target);
   const rim=new THREE.DirectionalLight(0xa5c4df,.7);rim.position.set(45,70,-70);scene.add(rim);
   onProgress('Loading photographed material maps');const scans=await loadScannedSurfaces(renderer);let propLibrary=null;try{onProgress('Loading real-world PBR props');propLibrary=await loadPropAssets(renderer);}catch(error){console.warn('Detailed props unavailable; using geometry fallback',error);}
-  let hdr=null,env=null,envTarget=null;try{hdr=await new RGBELoader().loadAsync('/assets/pbr/sky.hdr');hdr.mapping=THREE.EquirectangularReflectionMapping;const pmrem=new THREE.PMREMGenerator(renderer);envTarget=pmrem.fromEquirectangular(hdr);env=envTarget.texture;pmrem.dispose();}catch(e){console.warn('HDR unavailable; direct lighting remains active',e);}
+  let hdr=null,env=null,envTarget=null;try{hdr=await new RGBELoader().loadAsync(publicAsset('assets/pbr/sky.hdr'));hdr.mapping=THREE.EquirectangularReflectionMapping;const pmrem=new THREE.PMREMGenerator(renderer);envTarget=pmrem.fromEquirectangular(hdr);env=envTarget.texture;pmrem.dispose();}catch(e){console.warn('HDR unavailable; direct lighting remains active',e);}
   const room=new RoomEnvironment(),roomPmrem=new THREE.PMREMGenerator(renderer),indoorTarget=roomPmrem.fromScene(room,.045),indoorEnv=indoorTarget.texture;room.dispose();roomPmrem.dispose();
   let skyLighting=null;sun.shadow.autoUpdate=false;
   const flashlight=new THREE.SpotLight(0xe1f1df,0,50,Math.PI/6,.5,1.5);flashlight.shadow.mapSize.set(mobile?512:1024,mobile?512:1024);flashlight.shadow.bias=-.0002;flashlight.shadow.normalBias=.025;scene.add(flashlight,flashlight.target);

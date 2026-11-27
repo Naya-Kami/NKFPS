@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {publicAsset} from '../publicAsset.js';
 
 export const PROP_ASSETS=['crate','barrel','cabinet'];
 export function normalizePropAsset(scene){
@@ -11,7 +12,7 @@ export function normalizePropAsset(scene){
 }
 export async function loadPropAssets(renderer){
   const loader=new GLTFLoader(),entries=new Map();
-  await Promise.all(PROP_ASSETS.map(async id=>{const gltf=await loader.loadAsync(`/assets/props/${id}.glb`),asset=normalizePropAsset(gltf.scene);for(const value of Object.values(asset.material))if(value?.isTexture)value.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());entries.set(id,asset);}));
+  await Promise.all(PROP_ASSETS.map(async id=>{const gltf=await loader.loadAsync(publicAsset(`assets/props/${id}.glb`)),asset=normalizePropAsset(gltf.scene);for(const value of Object.values(asset.material))if(value?.isTexture)value.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());entries.set(id,asset);}));
   return{get:id=>entries.get(id),dispose(){for(const asset of entries.values()){asset.geometry.dispose();const textures=new Set(Object.values(asset.material).filter(t=>t?.isTexture));textures.forEach(t=>t.dispose());asset.material.dispose();}}};
 }
 export function createPropBatch(library,parent){
