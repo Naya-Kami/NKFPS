@@ -44,7 +44,7 @@ npm run build   # 配信用ファイルを dist/ に生成
 
 本番配信では `dist/` をHTTPSでホスティングします。Three.js、フォント、PBR素材、HDR、参考画像は同じオリジンから読み込み、実行時に外部CDNへ依存しません。`node_modules/` と `dist/` はGitに含めません。
 
-GitHub Pagesでは **Settings → Pages → Source → GitHub Actions** を指定します。`main` への更新で、ワークフローが検証とビルドを行い、生成した `dist/` を公開します。
+GitHub Pagesは `main` への更新を検証・ビルドし、生成した `dist/` を公開します。配信元を **Settings → Pages → Source → GitHub Actions** にすると、GitHubのブランチ配信を待たずに公開できます。
 
 ## 3つのマップ
 
