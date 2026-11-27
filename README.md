@@ -19,11 +19,11 @@ iPadでは上のURLをSafariで開いてください。現在の機能はマッ�
 
 現段階でFPSの戦闘やネット対戦が完成しているという意味ではありません。映像品質は継続して改善する目標で、他エンジンやAAA作品に対する優位性を測定済みという主張ではありません。
 
-## キャラクターデザインの次の改修
+## 人間キャラクターの3Dモデル
 
-現代衣装版は比較用の試作です。次は、戦場での動きやすさと衣装の可愛さ・色気を両立させ、顎の形と顔・体型の組み合わせを見直します。[女性7人のキャラクターデザイン再レビュー](docs/character-art-review.md)
+成人キャラクター7人のフィールド衣装版を追加しました。人物ごとに顎・頬・体型を調整し、現代衣装の色や裁断を短いジャケット、動きやすいボトム、ブーツやスニーカーに取り入れています。各GLBに骨格、ウェイト、待機アニメーションを収録しています。
 
-[現代衣装版の3Dモデル7体（GLB）](assets/characters/variants/female_everyday/README.md)
+[フィールド衣装版のGLB・新旧比較・6つのポーズ](assets/characters/variants/female_field/README.md) · [現代衣装版のGLB](assets/characters/variants/female_everyday/README.md) · [キャラクターデザイン再レビュー](docs/character-art-review.md)
 
 ## 起動とビルド
 

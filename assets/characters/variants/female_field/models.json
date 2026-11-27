@@ -1,0 +1,55 @@
+{
+  "revision": "field-v1",
+  "format": "GLB 2.0",
+  "models": [
+    {
+      "character": "レイナ・クロス",
+      "outfit": "ボルドーの斜め合わせジャケット、墨黒のパンツとショートブーツ",
+      "file": "reina_cross.glb",
+      "bytes": 7988976,
+      "sha256": "fba4732dc2aa7b1826d33588eb7422a32d211df2cd5e6069fec8b81174e8d296"
+    },
+    {
+      "character": "ミサキ・ヴェイル",
+      "outfit": "スレートの短いプリーツベスト、チャコールのロールネックとスリムパンツ",
+      "file": "misaki_veil.glb",
+      "bytes": 7948032,
+      "sha256": "63fe22e4c1449028afa08eb0e78f5b045bfd52b72c7985834ad0b69e241cdc26"
+    },
+    {
+      "character": "セリナ・ヴォルテージ",
+      "outfit": "コバルトのクロップジャージー、切り替えショーツとインナータイツ",
+      "file": "selina_voltage.glb",
+      "bytes": 8335200,
+      "sha256": "aa119b26c236507b588e97240fdfc8179ddfeceffc6c69a1f7aa09fa5be9cf12"
+    },
+    {
+      "character": "アヤメ・ブレイズ",
+      "outfit": "錆赤のワークジャケット、補強膝とマチ付きポケットのパンツ",
+      "file": "ayame_blaze.glb",
+      "bytes": 7915156,
+      "sha256": "5149ed0a2b5d3fa8395a6eadaddaa19f0862d85106c65b97c7fd426f93ca931a"
+    },
+    {
+      "character": "ノエル・スカイ",
+      "outfit": "アイボリーとネイビーのコートベスト、独立した腿パネルのランショーツ",
+      "file": "noel_sky.glb",
+      "bytes": 8107652,
+      "sha256": "3347dd0895710654a0b7cc1947cccd73d4ed604ee827291a2b97aab72133d363"
+    },
+    {
+      "character": "カレン・ルクス",
+      "outfit": "象牙色のスクエアネック・ダブルベスト、オリーブグレーのパンツ",
+      "file": "karen_lux.glb",
+      "bytes": 8070284,
+      "sha256": "e4383d7365bd1d66e5ae782e3b604df78ee4da7068ce63a1a0214b95713130f9"
+    },
+    {
+      "character": "ユリナ・ミラージュ",
+      "outfit": "プラムのワンショルダーと斜めのショートベスト、黒紫のライディングパンツ",
+      "file": "yurina_mirage.glb",
+      "bytes": 7819660,
+      "sha256": "9a8746299e1ad25b73522b136969e3e155c9fa37238027f4c5cea55b692416a3"
+    }
+  ]
+}

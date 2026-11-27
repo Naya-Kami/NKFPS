@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>キャラクターレビュー · PROJECT VELOCITY</title>
+  <style>
+    @font-face { font-family: Barlow; src: url('/fonts/BarlowCondensed-Bold.ttf'); font-weight: 700 }
+    * { box-sizing: border-box }
+    body { margin: 0; color: #25302f; background: #f5f3ee; font: 15px/1.6 system-ui, sans-serif }
+    main { min-height: 100svh; display: grid; grid-template-columns: minmax(16rem,22rem) 1fr }
+    aside { padding: clamp(1.2rem,3.5vw,3rem); align-self: center }
+    h1 { font: 700 clamp(2.3rem,5vw,4.4rem)/.94 Barlow,sans-serif; margin: 0 0 .7rem; letter-spacing: -.02em }
+    h2 { font-size: 1rem; margin: 0 0 2rem }
+    label { display: grid; gap: .3rem; margin: .9rem 0; color: #4e5b58; font-size: .83rem }
+    select { width: 100%; color: #25302f; font: inherit; font-size: .95rem; background: #fff; padding: .48rem; border: 1px solid #a6ada8; border-radius: .27rem }
+    section { min-width: 0; position: relative; background: #d7d8d4 }
+    canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; touch-action: none }
+    #status { position: absolute; top: 1rem; left: 1rem; background: #f7f6f1ed; padding: .35rem .8rem; border-radius: .3rem }
+    #status:empty { display: none }
+    small { color: #606763 }
+    @media(max-width: 700px) { main { grid-template-columns: 1fr; grid-template-rows: minmax(57svh,23rem) auto } section { grid-row: 1 } aside { padding: 1rem 1.3rem } h1 { font-size: 2.1rem } h2 { margin-bottom: .5rem } form { display: grid; grid-template-columns: 1fr 1fr; column-gap: .8rem } label { margin: .3rem 0 } }
+  </style>
+</head>
+<body>
+<main>
+  <aside>
+    <h1>PROJECT VELOCITY</h1>
+    <h2>キャラクターレビュー</h2>
+    <form>
+      <label>キャラクター<select id="character"></select></label>
+      <label>衣装<select id="variant"><option value="female_field">フィールド版</option><option value="female_everyday">現代衣装版</option></select></label>
+      <label>姿勢<select id="pose"><option value="stand">立位</option><option value="idle">待機アニメーション</option><option value="rest">基準姿勢</option><option value="run">走る</option><option value="crouch">しゃがむ</option><option value="slide">スライド</option><option value="wall">壁走り</option><option value="aim">照準姿勢</option><option value="reload">リロード姿勢</option></select></label>
+      <label>カメラ<select id="view"><option value="front">全身・正面</option><option value="three">全身・斜め</option><option value="side">全身・横</option><option value="rear">全身・斜め後ろ</option><option value="face">顔・正面</option><option value="portrait">顔・斜め</option><option value="profile">顔・横</option></select></label>
+      <label>表情<select id="expression"><option value="neutral">自然</option><option value="smile">微笑</option><option value="focus">集中</option></select></label>
+    </form>
+    <small>ドラッグで回転、ホイール・ピンチで拡大。</small>
+  </aside>
+  <section aria-label="3Dプレビュー"><canvas aria-label="選択したキャラクターの3Dモデル"></canvas><div id="status" role="status">読み込み中…</div></section>
+</main>
+<script type="module" src="./review.js"></script>
+</body>
+</html>
