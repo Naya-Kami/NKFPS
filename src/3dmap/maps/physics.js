@@ -42,20 +42,20 @@ export function supportHeight(world,x,z,maxY=Infinity,minY=-Infinity){
 // Substeps prevent tunnelling. Swept vertical intervals handle landings and
 // head hits against the same static shapes as the visible architecture.
 export function stepPlayer(state,world,input,dt){
-  const pos=state.position,jump=!!input.jump;if(jump&&!state.jumpHeld&&state.onGround){state.verticalVelocity=PLAYER.jump;state.onGround=false;}state.jumpHeld=jump;
+  const pos=state.position,jump=!!input.jump,height=input.height??PLAYER.height;if(jump&&!state.jumpHeld&&state.onGround){state.verticalVelocity=PLAYER.jump;state.onGround=false;}state.jumpHeld=jump;
   const n=Math.max(1,Math.ceil(Math.min(dt,.2)/(1/90))),step=Math.min(dt,.2)/n;
   for(let i=0;i<n;i++){
     for(const axis of['x','z']){
       const amount=(input[axis]||0)*step;if(!amount)continue;const x=pos.x+(axis==='x'?amount:0),z=pos.z+(axis==='z'?amount:0),feet=pos.y-PLAYER.eye;
       const support=state.onGround?supportHeight(world,x,z,feet+PLAYER.step,feet-.32):null,target=state.onGround&&support!==null?support:feet;
-      if(bodyIsClear(world,x,z,target)){pos.x=x;pos.z=z;if(state.onGround&&support!==null)pos.y=target+PLAYER.eye;}
+      if(bodyIsClear(world,x,z,target,height)){pos.x=x;pos.z=z;if(state.onGround&&support!==null)pos.y=target+PLAYER.eye;}
     }
     const feet=pos.y-PLAYER.eye;state.verticalVelocity=Math.max(-32,state.verticalVelocity-PLAYER.gravity*step);let next=feet+state.verticalVelocity*step;
     if(state.verticalVelocity<=0){const floor=supportHeight(world,pos.x,pos.z,feet+.02,next);if(floor!==null){next=floor;state.verticalVelocity=0;state.onGround=true;}else state.onGround=false;}
-    else{for(const c of collisionCandidates(world,pos.x,pos.z)){if(!overlapsCollider(world.map,c,pos.x,pos.z))continue;const[bottom]=boundsAt(world,c,pos.x,pos.z);if(feet+PLAYER.height<=bottom+EPS&&next+PLAYER.height>=bottom){next=Math.min(next,bottom-PLAYER.height);state.verticalVelocity=0;}}state.onGround=false;}
+    else{for(const c of collisionCandidates(world,pos.x,pos.z)){if(!overlapsCollider(world.map,c,pos.x,pos.z))continue;const[bottom]=boundsAt(world,c,pos.x,pos.z);if(feet+height<=bottom+EPS&&next+height>=bottom){next=Math.min(next,bottom-height);state.verticalVelocity=0;}}state.onGround=false;}
     pos.y=next+PLAYER.eye;
   }
-  if(state.onGround&&bodyIsClear(world,pos.x,pos.z,pos.y-PLAYER.eye))state.safePosition={x:pos.x,y:pos.y,z:pos.z};
+  if(state.onGround&&bodyIsClear(world,pos.x,pos.z,pos.y-PLAYER.eye,height))state.safePosition={x:pos.x,y:pos.y,z:pos.z};
   const kill=world.map.theme==='sky'?-32:world.map.theme==='coastal'?-13:-10;
   if(pos.y<kill&&state.safePosition){Object.assign(pos,state.safePosition);state.verticalVelocity=0;state.onGround=true;state.recoveries=(state.recoveries||0)+1;}
 }

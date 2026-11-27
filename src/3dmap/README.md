@@ -4,16 +4,16 @@ NKFPSが最終的にオンラインFPSゲームになるための、ワールド
 
 ## 入口
 
-- `startMapExplorer()`：現在のマップ閲覧・探索画面を起動。`src/main.js` から1回呼び出します。
+- `startMapExplorer()`：マップ閲覧・探索・射撃訓練の画面を起動。`src/main.js` から1回呼び出します。
 - `createWorld(container, onProgress)`：Three.jsのワールドを生成。`setMap`、`enter`、`setView`、`setQuality`と `dispose()` などの操作を返します。終了時は `dispose()` で描画ループとGPU資源を解放します。
 - `getMap(id)` / `MAP_IDS`：3枚のマップ定義を取得します。
 - `createPhysicsWorld` / `stepPlayer` / `PLAYER`：移動物理とプレイヤー寸法を共有します。
 
 公開入口は `index.js` です。ブラウザーUIは `explorer.js`、画像から読み取った配置は `maps/data/`、描画は `world.js`、衝突と重力は `maps/physics.js` が担当します。材質・装飾の追加で通路を変える場合も、表示と当たり判定をそろえて既存の移動テストを確認してください。
 
-## 将来のFPS機能との境界
+## 射撃訓練
 
-射撃、武器、マッチ進行、オンライン同期は今後の実装です。これらのコードを地形生成や探索UIへ直接混ぜず、別のゲーム用モジュールから必要なマップ・描画・移動APIを使用する構成へ発展させます。
+`combat/` の射撃訓練は、購入と弾薬の管理、プレイヤーの移動と姿勢、弾道と標的の命中判定を担当します。各マップの攻撃側開始地点から訓練を始め、弾道は移動物理と共通のマップの衝突形状を使います。アヤメの全身モデルは、訓練中に全身ビューを初めて選んだときに読み込みます。
 
 素材はリポジトリ共通の `public/assets/`、提供画像は `public/references/` にあります。ライセンスと原図の扱いはルートREADMEと `public/THIRD_PARTY.md` を参照してください。
 

@@ -20,8 +20,20 @@ import {mapReflections} from './maps/reflections.js';
 import {canOccupy,spawnPosition} from './maps/navigation.js';
 import {createPhysicsWorld,stepPlayer,PLAYER} from './maps/physics.js';
 import {publicAsset} from './publicAsset.js';
+import {createCombatController} from './combat/controller.js';
+import {traceRangeSegment} from './combat/range.js';
 
 const V=THREE.Vector3,clamp=THREE.MathUtils.clamp;
+
+class ForegroundPass extends RenderPass {
+  render(renderer, writeBuffer, readBuffer) {
+    // The arms share the scene's color buffer and get their own depth test.
+    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
+    renderer.clearDepth();
+    super.render(renderer, writeBuffer, readBuffer);
+  }
+}
+
 export async function createWorld(container,onProgress=()=>{}){
   const mobile=navigator.maxTouchPoints>1||matchMedia('(pointer:coarse)').matches;
   const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
@@ -39,15 +51,26 @@ export async function createWorld(container,onProgress=()=>{}){
   const composer=new EffectComposer(renderer),renderPass=new RenderPass(scene,camera);composer.addPass(renderPass);
   const ssao=new SSAOPass(scene,camera,800,600,32);ssao.kernelRadius=2.2;ssao.minDistance=.0004;ssao.maxDistance=.025;composer.addPass(ssao);
   const baseVisibility=ssao._overrideVisibility.bind(ssao);ssao._overrideVisibility=()=>{baseVisibility();scene.traverse(o=>{if(o.isMesh&&o.visible&&(o.isReflector||o.material?.transparent||o.material?.alphaTest>0)){o.visible=false;ssao._visibilityCache.push(o);}});};
-  const bloom=new UnrealBloomPass(new THREE.Vector2(800,600),.14,.45,1.3);composer.addPass(bloom);const smaa=new SMAAPass();composer.addPass(smaa);composer.addPass(new OutputPass());
+  const bloom=new UnrealBloomPass(new THREE.Vector2(800,600),.14,.45,1.3);composer.addPass(bloom);
+  const weaponScene = new THREE.Scene();
+  const weaponCamera = new THREE.PerspectiveCamera(62, 1, .025, 10);
+  weaponScene.add(weaponCamera);
+  const weaponPass = new ForegroundPass(weaponScene, weaponCamera);
+  weaponPass.clear = false;
+  weaponPass.enabled = false;
+  composer.addPass(weaponPass);
+  const smaa=new SMAAPass();composer.addPass(smaa);composer.addPass(new OutputPass());
   const state={mode:'overview',view:'plan',mapId:'blacksite',paused:false,position:new V(),yaw:0,pitch:0,sprint:100,verticalVelocity:0,onGround:true,moving:false,quality:mobile?'balanced':'high',weather:true,night:false,flashlight:false,viewMove:new THREE.Vector2(),orbitYaw:0,orbitPitch:1.1,zoom:1,labels:true,routes:true,elapsed:0};
   const keys={},highScans={},highLoads=new Map(),shadowFocus=new V(Infinity,0,Infinity);let profile=qualityProfile(state.quality,mobile),surfaceEpoch=0;
   let map=getMap('blacksite'),model,environment,reflection,surfaceContext,materials,physicsWorld,lightBudget,disposed=false,latestFps=0,frames=0,frameTime=0,lastLight=-1,renderSize={width:800,height:600};
+  let combat = null;
+  let character = null, characterLoad = null, previewRequested = false, previewShowing = false;
+  const previewBoom = new V(), previewFocus = new V(), previewSample = new V();
   function refreshCamera(){camera=state.mode==='playing'||state.view==='orbit'?perspective:planCamera;renderPass.camera=camera;ssao.camera=camera;const flag=camera.isPerspectiveCamera?1:0;
     for(const mat of[ssao.ssaoMaterial,ssao.depthRenderMaterial]){if(mat.defines.PERSPECTIVE_CAMERA!==flag){mat.defines.PERSPECTIVE_CAMERA=flag;mat.needsUpdate=true;}mat.uniforms.cameraNear.value=camera.near;mat.uniforms.cameraFar.value=camera.far;}
     ssao.ssaoMaterial.uniforms.cameraProjectionMatrix.value.copy(camera.projectionMatrix);ssao.ssaoMaterial.uniforms.cameraInverseProjectionMatrix.value.copy(camera.projectionMatrixInverse);
   }
-  function resize(){const r=container.getBoundingClientRect();renderSize={width:Math.max(1,r.width),height:Math.max(1,r.height)};const aspect=renderSize.width/renderSize.height;perspective.aspect=aspect;perspective.updateProjectionMatrix();
+  function resize(){const r=container.getBoundingClientRect();renderSize={width:Math.max(1,r.width),height:Math.max(1,r.height)};const aspect=renderSize.width/renderSize.height;perspective.aspect=aspect;perspective.updateProjectionMatrix();weaponCamera.aspect=aspect;weaponCamera.updateProjectionMatrix();
     const frame=map.frame,w=(frame[2]-frame[0])*.1,h=(frame[3]-frame[1])*.1,span=Math.max(h+9,(w+12)/aspect)*state.zoom;
     planCamera.left=-span*aspect/2;planCamera.right=span*aspect/2;planCamera.top=span/2;planCamera.bottom=-span/2;planCamera.updateProjectionMatrix();renderer.setPixelRatio(renderPixelRatio(profile,renderSize.width,renderSize.height,devicePixelRatio));renderer.setSize(renderSize.width,renderSize.height);composer.setPixelRatio(renderer.getPixelRatio());composer.setSize(renderSize.width,renderSize.height);if(profile.ao){const ratio=renderer.getPixelRatio()*profile.ao;ssao.setSize(Math.max(1,Math.round(renderSize.width*ratio)),Math.max(1,Math.round(renderSize.height*ratio)));}refreshCamera();
   }
@@ -58,6 +81,7 @@ export async function createWorld(container,onProgress=()=>{}){
     scene.fog=new THREE.FogExp2(p.fog,p.fogDensity);hemi.intensity=p.hemi;sun.intensity=p.sun;sun.color.setHex(p.sunColor);rim.intensity=p.rim;renderer.toneMappingExposure=p.exposure;updateShadow(true);
   }
   async function setMap(id){
+    stopCombat();
     const next=getMap(id);if(model){scene.remove(model.group,environment.group,reflection.mesh);lightBudget?.dispose();model.dispose();environment.dispose();reflection.dispose();surfaceContext.dispose();for(const m of Object.values(materials))m.dispose();}
     map=next;if(map.theme==='sky'&&!skyLighting){onProgress('Preparing atmospheric sky and reflections');skyLighting=createSkyLighting(renderer,mobile);}state.mapId=map.id;state.mode='overview';state.view='plan';state.zoom=1;state.orbitYaw=0;state.paused=false;state.viewMove.set(0,0);Object.keys(keys).forEach(k=>keys[k]=false);
     surfaceContext=createSurfaceContext(map,mobile);
@@ -72,13 +96,73 @@ export async function createWorld(container,onProgress=()=>{}){
   }
   async function upgradeSurfaces(){const epoch=++surfaceEpoch;state.textureStatus=profile.hi.length?'loading':'ready';try{await Promise.all(profile.hi.map(name=>{if(!highLoads.has(name))highLoads.set(name,loadScannedSurfaces(renderer,{names:[name],resolution:'hi'}).then(sets=>{highScans[name]=sets[name];}).catch(e=>{highLoads.delete(name);throw e;}));return highLoads.get(name);}));if(epoch!==surfaceEpoch)return;for(const mat of Object.values(materials||{})){const name=mat.userData.surface;if(!name)continue;const set=profile.hi.includes(name)?highScans[name]:scans[name];Object.assign(mat,set);mat.needsUpdate=true;}reflection?.setNormalMap((profile.hi.includes('concrete')?highScans.concrete:scans.concrete).normalMap);state.textureStatus='ready';}catch(e){if(epoch===surfaceEpoch)state.textureStatus='fallback';console.warn('High-resolution surfaces unavailable; bundled base maps remain active',e);}}
   function setQuality(q){state.quality=QUALITY_IDS.includes(q)?q:'balanced';profile=qualityProfile(state.quality,mobile);ssao.enabled=profile.ao>0;bloom.enabled=profile.bloom;smaa.enabled=state.quality!=='performance';reflection?.setQuality(state.quality);environment?.setQuality(state.quality);lightBudget?.setBudget(profile.lights);if(materials){const transmission=!mobile&&['high','ultra'].includes(state.quality);materials.glass.transmission=transmission?.82:0;materials.glass.thickness=.035;materials.glass.opacity=transmission?1:map.theme==='sky'?.25:.23;materials.glass.needsUpdate=true;renderer.transmissionResolutionScale=state.quality==='ultra'?1:.65;}for(const rt of[composer.renderTarget1,composer.renderTarget2]){const samples=Math.min(profile.samples,renderer.capabilities.maxSamples);if(rt.samples!==samples){rt.samples=samples;rt.dispose();}}if(sun.shadow.mapSize.x!==profile.shadow){sun.shadow.mapSize.setScalar(profile.shadow);sun.shadow.map?.dispose();sun.shadow.map=null;}flashlight.castShadow=state.flashlight&&['high','ultra'].includes(state.quality);updateShadow(true);lastLight=-1;resize();upgradeSurfaces();}
-  function setView(view){state.mode='overview';state.view=view;state.paused=false;model.roofs.visible=false;applyLighting();resize();}
+  function setView(view){stopCombat();state.mode='overview';state.view=view;state.paused=false;model.roofs.visible=false;applyLighting();resize();}
   function orbit(dx,dy,zoom=0){if(state.mode==='playing')return;if(dx||dy){state.view='orbit';state.orbitYaw-=dx*.006;state.orbitPitch=clamp(state.orbitPitch+dy*.004,.3,1.48);}state.zoom=clamp(state.zoom+zoom,.52,1.9);resize();}
-  function enter(poiId='attacker'){
+  function placePlayer(poiId='attacker'){
     state.position.set(...spawnPosition(map,poiId,model.colliders));state.safePosition={x:state.position.x,y:state.position.y,z:state.position.z};state.onGround=true;state.jumpHeld=false;state.jumpQueued=false;state.yaw=0;state.pitch=0;state.verticalVelocity=0;state.mode='playing';state.paused=false;model.roofs.visible=true;model.routes.visible=false;applyLighting();refreshCamera();
   }
+  function stopCombat() {
+    previewRequested = false;
+    previewShowing = false;
+    character?.setVisible(false);
+    combat?.dispose();
+    combat = null;
+    weaponPass.enabled = false;
+  }
+  function enter(poiId) {
+    stopCombat();
+    placePlayer(poiId);
+  }
+  function startCombat(events) {
+    stopCombat();
+    placePlayer();
+    state.sprint = 100;
+    combat = createCombatController(scene, weaponCamera, physicsWorld, events);
+    weaponPass.enabled = true;
+  }
+  function deployCombat() {
+    if (combat?.session.state.phase !== 'buy') return false;
+    placePlayer();
+    state.sprint = 100;
+    return combat.deploy(state.position, state.yaw);
+  }
+  async function toggleCharacterPreview() {
+    if (!combat) return;
+    previewRequested = !previewRequested;
+    if (!previewRequested || character) return;
+    const owner = combat;
+    if (!characterLoad) {
+      characterLoad = import('./combat/character.js')
+        .then(({createCombatCharacter}) => createCombatCharacter(scene))
+        .then(model => {
+          if (disposed) model.dispose();
+          else character = model;
+        })
+        .finally(() => { characterLoad = null; });
+    }
+    try {
+      await characterLoad;
+    } catch (error) {
+      if (combat === owner) previewRequested = false;
+      throw error;
+    }
+  }
+  function resolvePreviewCamera(eye) {
+    const sin = Math.sin(state.yaw), cos = Math.cos(state.yaw);
+    previewBoom.set(sin * 3.65 + cos * .66, .83, cos * 3.65 - sin * .66).add(eye);
+    const hit = traceRangeSegment(physicsWorld, eye, previewBoom, previewSample);
+    const fraction = hit === null ? 1 : Math.max(0, hit - .065);
+    if (fraction < .26) return false;
+    previewBoom.lerp(eye, 1 - fraction);
+    previewFocus.set(state.position.x - sin * 1.35, state.position.y - .68 + state.pitch * .45, state.position.z - cos * 1.35);
+    return true;
+  }
   const home=()=>setView('plan');
-  function look(dx,dy,sensitivity=1){state.yaw-=dx*.002*sensitivity;state.pitch=clamp(state.pitch-dy*.002*sensitivity,-1.35,1.35);}
+  function look(dx,dy,sensitivity=1){
+    if (combat?.shopOpen) return;
+    sensitivity *= combat?.look(dx,dy) ?? 1;
+    state.yaw-=dx*.002*sensitivity;state.pitch=clamp(state.pitch-dy*.002*sensitivity,-1.35,1.35);
+  }
   function blocked(x,z){return !canOccupy(map,model.colliders,x,z,state.position.y-1.7);}
   function setNight(value){state.night=value;applyLighting();}function setFlashlight(value){state.flashlight=value;flashlight.intensity=value?36:0;flashlight.castShadow=value&&['high','ultra'].includes(state.quality);renderer.shadowMap.needsUpdate=true;}
   const clock=new THREE.Clock();
@@ -95,20 +179,57 @@ export async function createWorld(container,onProgress=()=>{}){
     }else if(!state.paused){
       let pad;try{pad=navigator.getGamepads?.()[0];}catch{}
       const dz=v=>Math.abs(v||0)>.15?v:0;let x=(keys.KeyD?1:0)-(keys.KeyA?1:0)+state.viewMove.x+dz(pad?.axes[0]),z=(keys.KeyS?1:0)-(keys.KeyW?1:0)+state.viewMove.y+dz(pad?.axes[1]);const len=Math.hypot(x,z);if(len>1){x/=len;z/=len;}
-      if(pad){state.yaw-=dz(pad.axes[2])*dt*2;state.pitch=clamp(state.pitch-dz(pad.axes[3])*dt*1.5,-1.35,1.35);}
-      const sprint=(keys.ShiftLeft||keys.ShiftRight||pad?.buttons[10]?.pressed)&&len>.1&&state.sprint>1,speed=sprint?6.6:4.1;state.sprint=clamp(state.sprint+dt*(sprint?-19:13),0,100);
-      const co=Math.cos(state.yaw),si=Math.sin(state.yaw);stepPlayer(state,physicsWorld,{x:(x*co+z*si)*speed,z:(z*co-x*si)*speed,jump:keys.Space||pad?.buttons[0]?.pressed||state.jumpQueued},dt);state.jumpQueued=false;
-      perspective.position.copy(state.position);perspective.position.y+=len>.1&&state.onGround?Math.sin(t*(sprint?12:9))*.028:0;perspective.rotation.set(state.pitch,state.yaw,0,'YXZ');perspective.fov=THREE.MathUtils.lerp(perspective.fov,sprint?76:68,dt*6);perspective.updateProjectionMatrix();state.moving=len>.1;refreshCamera();
+      if(pad)look(dz(pad.axes[2])*dt*1000,dz(pad.axes[3])*dt*750);
+      const sprintRequested=keys.ShiftLeft||keys.ShiftRight||pad?.buttons[10]?.pressed;
+      const jump=keys.Space||pad?.buttons[0]?.pressed||state.jumpQueued;
+      if (combat) {
+        const combatDt = Math.min(raw, .1);
+        const pose = combat.move(state, {
+          x, z, jump, sprint: sprintRequested,
+          crouch: keys.ControlLeft || keys.ControlRight || keys.KeyC || pad?.buttons[11]?.pressed,
+          aim: pad?.buttons[6]?.pressed
+        }, combatDt);
+        const {aiming} = combat.info;
+        const aimFov = combat.session.state.weaponId === 'marksman' ? 39 : 52;
+        perspective.position.copy(state.position);
+        perspective.position.y += pose.eyeOffset;
+        perspective.rotation.set(state.pitch, state.yaw, pose.roll, 'YXZ');
+        perspective.fov = THREE.MathUtils.damp(perspective.fov, aiming ? aimFov : pose.sprinting ? 73 : 64, 10, combatDt);
+        weaponCamera.position.copy(perspective.position);
+        weaponCamera.quaternion.copy(perspective.quaternion);
+        weaponCamera.fov = perspective.fov;
+        weaponCamera.updateProjectionMatrix();
+        previewShowing = Boolean(previewRequested && character && resolvePreviewCamera(weaponCamera.position));
+        character?.setVisible(previewShowing);
+        weaponPass.enabled = !previewShowing;
+        if (previewShowing) {
+          const {reloadProgress, weaponId} = combat.session.state;
+          character.update(combatDt, {...pose, position: state.position, yaw: state.yaw, pitch: state.pitch, aiming, reloadProgress, weaponId});
+        }
+        combat.update(combatDt, perspective, pad, raw, previewShowing ? character : null);
+        if (previewShowing) {
+          perspective.position.copy(previewBoom);
+          perspective.lookAt(previewFocus);
+          perspective.fov = 57;
+        }
+      } else {
+        const sprint=sprintRequested&&len>.1&&state.sprint>1,speed=sprint?6.6:4.1;state.sprint=clamp(state.sprint+dt*(sprint?-19:13),0,100);
+        const co=Math.cos(state.yaw),si=Math.sin(state.yaw);stepPlayer(state,physicsWorld,{x:(x*co+z*si)*speed,z:(z*co-x*si)*speed,jump},dt);
+        perspective.position.copy(state.position);perspective.position.y+=len>.1&&state.onGround?Math.sin(t*(sprint?12:9))*.028:0;perspective.rotation.set(state.pitch,state.yaw,0,'YXZ');perspective.fov=THREE.MathUtils.lerp(perspective.fov,sprint?76:68,dt*6);state.moving=len>.1;
+      }
+      state.jumpQueued=false;perspective.updateProjectionMatrix();refreshCamera();
     }
     if(t-lastLight>.35){lastLight=t;lightBudget.select(state.mode==='playing'?state.position:new V(...toWorld(map,map.focus,2)));}lightBudget.update(dt);
-    flashlight.position.copy(camera.position);flashlight.target.position.copy(camera.position).add(new V(0,0,-20).applyQuaternion(camera.quaternion));
+    const flashlightView = combat ? weaponCamera : camera;
+    flashlight.position.copy(flashlightView.position);flashlight.target.position.copy(flashlightView.position).add(new V(0,0,-20).applyQuaternion(flashlightView.quaternion));
     for(const d of model.dynamic){if(d.type==='core')d.mesh.material.emissiveIntensity=.9+Math.sin(t*.7)*.08;if(d.type==='boat'){d.mesh.rotation.z=Math.sin(t*.7)*.025;d.mesh.position.y=d.baseY+Math.sin(t*.6)*.13;}}
     updateShadow();if(flashlight.castShadow&&state.mode==='playing')renderer.shadowMap.needsUpdate=true;
     composer.render();frames++;if(t-frameTime>1){latestFps=Math.round(frames/(t-frameTime));frames=0;frameTime=t;}requestAnimationFrame(update);
   }
   onProgress('Building the traced Blacksite Echo layout');await setMap('blacksite');resize();requestAnimationFrame(update);
-  function dispose(){if(disposed)return;disposed=true;surfaceEpoch++;lightBudget?.dispose();model?.dispose();environment?.dispose();reflection?.dispose();surfaceContext?.dispose();Object.values(materials||{}).forEach(m=>m.dispose());for(const set of new Set([...Object.values(scans),...Object.values(highScans)]))Object.values(set).forEach(t=>t.dispose());for(const pass of composer.passes)pass.dispose?.();composer.dispose();envTarget?.dispose();indoorTarget.dispose();hdr?.dispose();propLibrary?.dispose();skyLighting?.dispose();sun.shadow.dispose();flashlight.shadow.dispose();renderer.dispose();renderer.domElement.remove();}
-  return{scene,renderer,state,keys,get camera(){return camera;},get map(){return map;},get model(){return model;},setMap,setView,enter,home,teleport:enter,orbit,look,resize,setQuality,setNight,setFlashlight,blocked,dispose,
+  function dispose(){if(disposed)return;disposed=true;stopCombat();character?.dispose();surfaceEpoch++;lightBudget?.dispose();model?.dispose();environment?.dispose();reflection?.dispose();surfaceContext?.dispose();Object.values(materials||{}).forEach(m=>m.dispose());for(const set of new Set([...Object.values(scans),...Object.values(highScans)]))Object.values(set).forEach(t=>t.dispose());for(const pass of composer.passes)pass.dispose?.();composer.dispose();envTarget?.dispose();indoorTarget.dispose();hdr?.dispose();propLibrary?.dispose();skyLighting?.dispose();sun.shadow.dispose();flashlight.shadow.dispose();renderer.dispose();renderer.domElement.remove();}
+  return{scene,renderer,state,keys,get camera(){return camera;},get map(){return map;},get model(){return model;},get combat(){return combat;},startCombat,deployCombat,toggleCharacterPreview,setMap,setView,enter,home,teleport:enter,orbit,look,resize,setQuality,setNight,setFlashlight,blocked,dispose,
+    get characterPreview(){return {preview: Boolean(previewRequested && character), previewShowing, previewLoading: Boolean(previewRequested && characterLoad)};},
     get fps(){return latestFps;},get zone(){return roomAt(map,state.position.x,state.position.z,state.position.y-PLAYER.eye);},get stats(){return{drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,walls:wallSegmentsCount(),rooms:map.rooms.length};}};
   function wallSegmentsCount(){return model.colliders.filter(c=>c.kind==='wall').length;}
 }

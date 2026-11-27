@@ -8,6 +8,7 @@ import {floorGeometry,slabGeometry} from '../src/3dmap/maps/geometry.js';
 import {buildMap,createMaterials} from '../src/3dmap/maps/model.js';
 import {spawnPosition} from '../src/3dmap/maps/navigation.js';
 import {PLAYER,createPhysicsWorld,stepPlayer,bodyIsClear,collisionCandidates,overlapsCollider} from '../src/3dmap/maps/physics.js';
+import {createCombatMovement} from '../src/3dmap/combat/movement.js';
 
 globalThis.document=createCanvasDocument();
 const propLibrary=await bundledPropLibrary();
@@ -35,6 +36,22 @@ test('thin walls stop sprinting even on a long frame, while allowing sliding alo
 test('holding jump does not trigger repeated jumps on landing',()=>{
   const world=createPhysicsWorld(fixture()),state=player();simulate(state,world,2,{jump:true});assert.ok(Math.abs(state.position.y-PLAYER.eye)<.02);assert.equal(state.onGround,true);
   stepPlayer(state,world,{jump:false},1/60);stepPlayer(state,world,{jump:true},1/60);assert.ok(state.position.y>PLAYER.eye);
+});
+test('practice movement crouches under low cover and stands after leaving it',()=>{
+  const ceiling={kind:'slab',polygon:rectPoly([1,-2,1.5,4]),bottom:1.35,top:1.6};
+  const world=createPhysicsWorld(fixture(),[ceiling]),state={...player(),yaw:0},movement=createCombatMovement();
+  for(let i=0;i<30;i++)movement.step(state,world,{x:1},1/60);
+  assert.ok(state.position.x<1);
+  for(let i=0;i<45;i++)movement.step(state,world,{x:1,crouch:true},1/60);
+  assert.ok(state.position.x>1&&state.position.x<2.5);
+  const underneath=movement.step(state,world,{x:1},1/60);
+  assert.equal(underneath.crouched,true);
+  assert.ok(underneath.eyeOffset<-.5);
+  for(let i=0;i<70;i++)movement.step(state,world,{x:1},1/60);
+  const clear=movement.step(state,world,{},1/60);
+  assert.equal(clear.crouched,false);
+  assert.ok(Math.abs(clear.eyeOffset)<.06);
+  assert.ok(Math.abs(state.position.y-PLAYER.eye)<.02);
 });
 test('stairwells remove visible deck triangles and slab faces at the ascending route',()=>{
   const map=fixture({stairs:[{id:'access',from:[0,0],to:[4,0],width:2,fromY:0,toY:3}],bridges:[{id:'bridge',polygon:rectPoly([2,-2,4,4]),floorY:3}]}),surface=levelSurfaces(map).find(f=>f.id==='bridge');

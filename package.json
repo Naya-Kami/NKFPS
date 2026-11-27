@@ -7,7 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "check": "node scripts/check.mjs",
-    "test": "node tests/world.test.js && node tests/rendering.test.js && node tests/physics.test.js && node tests/visual-systems.test.js"
+    "test": "node tests/world.test.js && node tests/rendering.test.js && node tests/physics.test.js && node tests/visual-systems.test.js && node tests/combat-session.test.js && node tests/range.test.js"
   },
   "dependencies": {
     "three": "0.180.0"

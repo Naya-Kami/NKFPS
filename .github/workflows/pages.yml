@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      entry: ${{ steps.site.outputs.entry }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,6 +28,12 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      - name: Record the built entry point
+        id: site
+        run: |
+          entry=$(sed -n 's/.*<script type="module"[^>]*src="\([^"]*\)".*/\1/p' dist/index.html)
+          test -n "$entry"
+          echo "entry=$entry" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -58,3 +66,21 @@ jobs:
           fi
       - id: publish
         uses: actions/deploy-pages@v4
+      - name: Verify the published FPS entry
+        env:
+          PAGES_URL: ${{ steps.publish.outputs.page_url }}
+          BUILT_ENTRY: ${{ needs.build.outputs.entry }}
+        run: |
+          site=${PAGES_URL%/}/
+          for attempt in {1..12}; do
+            if curl --fail --silent --show-error --max-time 10 "${site}?deploy=$GITHUB_SHA" -o "$RUNNER_TEMP/nkfps.html" &&
+              grep -Fq 'id="practice-button"' "$RUNNER_TEMP/nkfps.html" &&
+              grep -Fq "src=\"$BUILT_ENTRY\"" "$RUNNER_TEMP/nkfps.html" &&
+              curl --fail --silent --show-error --max-time 10 -o /dev/null "${site}${BUILT_ENTRY#./}"; then
+              echo "The published page serves the FPS entry and the bundle from this build."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::GitHub Pages did not serve the expected build at $site"
+          exit 1
